@@ -21,7 +21,6 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan("pl.exsio.querydsl.entityql")
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
 public class SpringContext {

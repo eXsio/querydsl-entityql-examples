@@ -1,7 +1,7 @@
 package pl.exsio.querydsl.entityql.examples.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name = "USERS")
