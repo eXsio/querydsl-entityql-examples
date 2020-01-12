@@ -41,12 +41,19 @@
             <version>2.0.10</version>
         </dependency>
 
-        <!-- dependencies required by EntityQL when used with Spring -->
+        <!-- dependencies required by EntityQL -->
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-sql</artifactId>
             <version>4.2.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>1.0.2.Final</version>
+        </dependency>
+
+        <!-- dependencies required by EntityQL when used with Spring -->
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-sql-spring</artifactId>
@@ -95,7 +102,6 @@
                 </configuration>
             </plugin>
 
-            <!-- use EntityQL in the same version as in project -->
             <plugin>
                 <groupId>com.github.eXsio</groupId>
                 <artifactId>querydsl-entityql-maven-plugin</artifactId>
@@ -112,6 +118,7 @@
                     </generators>
                 </configuration>
                 <dependencies>
+                    <!-- use EntityQL in the same version as in project -->
                     <dependency>
                         <groupId>com.github.eXsio</groupId>
                         <artifactId>querydsl-entityql</artifactId>
