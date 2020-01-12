@@ -1,4 +1,4 @@
-package pl.exsio.querydsl.entityql.examples.dynamic;
+package pl.exsio.querydsl.entityql.examples.service.generated;
 
 import com.querydsl.sql.SQLQueryFactory;
 import com.querydsl.sql.dml.SQLUpdateClause;
@@ -8,6 +8,8 @@ import pl.exsio.querydsl.entityql.Q;
 import pl.exsio.querydsl.entityql.examples.Example;
 import pl.exsio.querydsl.entityql.examples.entity.Book;
 import pl.exsio.querydsl.entityql.examples.entity.UploadedFile;
+import pl.exsio.querydsl.entityql.examples.entity.generated.QBook;
+import pl.exsio.querydsl.entityql.examples.entity.generated.QUploadedFile;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
@@ -17,73 +19,73 @@ import java.util.stream.IntStream;
 import static com.querydsl.core.types.Projections.constructor;
 
 @Service
-public class QDmlDynamicExample implements Example {
+public class QDmlGeneratedExample implements Example {
 
     private final SQLQueryFactory queryFactory;
 
-    public QDmlDynamicExample(SQLQueryFactory queryFactory) {
+    public QDmlGeneratedExample(SQLQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
     }
 
     private void insertNewEntity() {
-        Q<Book> book = EntityQL.qEntity(Book.class);
+        QBook book = QBook.INSTANCE;
         queryFactory.insert(book)
-                .set(book.longNumber("id"), 10L)
-                .set(book.string("name"), "newBook")
-                .set(book.decimalNumber("price"), BigDecimal.ONE)
+                .set(book.id, 100L)
+                .set(book.name, "newBook3")
+                .set(book.price, BigDecimal.ONE)
                 .execute();
 
     }
 
     private void insertNewEntityUsingSetMethod() {
-        Q<Book> book = EntityQL.qEntity(Book.class);
+        QBook book = QBook.INSTANCE;
         book.set(
                 queryFactory.insert(book),
-                "id", 11L,
-                "name", "newBook2",
-                "price", BigDecimal.ONE)
+                book.id, 110L,
+                book.name, "newBook4",
+                book.price, BigDecimal.ONE)
                 .execute();
 
     }
 
     private void updateExistingEntity() {
 
-        Q<Book> book = EntityQL.qEntity(Book.class);
+        QBook book = QBook.INSTANCE;
 
         queryFactory.update(book)
-                .set(book.string("name"), "updatedBook")
-                .set(book.decimalNumber("price"), BigDecimal.ONE)
-                .where(book.longNumber("id").eq(9L))
+                .set(book.name, "updatedBook2")
+                .set(book.price, BigDecimal.ONE)
+                .where(book.id.eq(9L))
                 .execute();
     }
 
 
     private void updateExistingEntityUsingSetMethod() {
 
-        Q<Book> book = EntityQL.qEntity(Book.class);
+        QBook book = QBook.INSTANCE;
 
         SQLUpdateClause update = queryFactory.update(book)
-                .where(book.longNumber("id").eq(9L));
+                .where(book.id.eq(9L));
 
         book.set(update,
-                "name", "updatedBook",
-                "price", BigDecimal.ONE
+                book.name, "updatedBook2",
+                book.price, BigDecimal.ONE
         ).execute();
     }
 
     private void deleteExistingEntity() {
 
-        Q<Book> book = EntityQL.qEntity(Book.class);
+        QBook book = QBook.INSTANCE;
 
         queryFactory.delete(book)
-                .where(book.longNumber("id").eq(4L))
+                .where(book.id.eq(4L))
                 .execute();
 
     }
 
     private void insertAndReadByteArray() {
 
-        Q<UploadedFile> file = EntityQL.qEntity(UploadedFile.class);
+        QUploadedFile file = QUploadedFile.INSTANCE;
 
         UUID id = UUID.randomUUID();
         int size = 10;
@@ -91,14 +93,14 @@ public class QDmlDynamicExample implements Example {
         IntStream.range(0, size).forEach(i -> data[i] = 2);
 
         queryFactory.insert(file)
-                .set(file.uuid("id"), id)
-                .set(file.array("data"), data)
+                .set(file.id, id)
+                .set(file.data, data)
                 .execute();
 
         UploadedFile uploadedFile = queryFactory.select(
-                constructor(UploadedFile.class, file.<byte[]>array("data"), file.uuid("id")))
+                constructor(UploadedFile.class, file.data, file.id))
                 .from(file)
-                .where(file.uuid("id").eq(id))
+                .where(file.id.eq(id))
                 .fetchOne();
 
         System.out.println(uploadedFile);

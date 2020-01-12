@@ -1,4 +1,4 @@
-package pl.exsio.querydsl.entityql.examples.generated;
+package pl.exsio.querydsl.entityql.examples.service.generated;
 
 import com.querydsl.sql.SQLQueryFactory;
 import org.springframework.stereotype.Service;

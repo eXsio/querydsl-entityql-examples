@@ -1,4 +1,4 @@
-package pl.exsio.querydsl.entityql.examples.dynamic;
+package pl.exsio.querydsl.entityql.examples.service.dynamic;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.sql.SQLExpressions;

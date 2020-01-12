@@ -1,4 +1,4 @@
-package pl.exsio.querydsl.entityql.examples.dynamic;
+package pl.exsio.querydsl.entityql.examples.service.dynamic;
 
 import com.querydsl.sql.SQLQueryFactory;
 import org.springframework.stereotype.Service;
