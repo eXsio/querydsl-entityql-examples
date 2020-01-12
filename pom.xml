@@ -13,9 +13,10 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.2.1.RELEASE</version>
-        <relativePath />
+        <relativePath/>
     </parent>
 
+    <!-- JitPack repository for EntityQL library -->
     <repositories>
         <repository>
             <id>jitpack.io</id>
@@ -23,6 +24,7 @@
         </repository>
     </repositories>
 
+    <!-- JitPack repository for EntityQL Maven plugin -->
     <pluginRepositories>
         <pluginRepository>
             <id>jitpack.io</id>
@@ -32,12 +34,14 @@
 
     <dependencies>
 
+        <!-- EntityQL in the newest available version -->
         <dependency>
             <groupId>com.github.eXsio</groupId>
             <artifactId>querydsl-entityql</artifactId>
             <version>2.0.10</version>
         </dependency>
 
+        <!-- dependencies required by EntityQL when used with Spring -->
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-sql</artifactId>
@@ -54,15 +58,17 @@
             <version>0.9.11</version>
         </dependency>
 
+        <!-- Spring Boot Starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
+
+        <!-- Dependencies needed to create and populate H2 database and to provide JPA API -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -77,6 +83,7 @@
 
     <build>
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -87,15 +94,20 @@
                     <compilerArgument>-parameters</compilerArgument>
                 </configuration>
             </plugin>
+
+            <!-- use EntityQL in the same version as in project -->
             <plugin>
                 <groupId>com.github.eXsio</groupId>
                 <artifactId>querydsl-entityql-maven-plugin</artifactId>
-                <version>0.0.20</version>
+                <version>1.0.0</version>
                 <configuration>
                     <generators>
                         <generator>
                             <sourcePackage>pl.exsio.querydsl.entityql.examples.entity</sourcePackage>
                             <destinationPackage>pl.exsio.querydsl.entityql.examples.entity.generated</destinationPackage>
+                            <!-- below settings are not required. If not provided, will have the below, default values -->
+                            <!-- <destinationPath>${project.basedir}\src\main\java</destinationPath>-->
+                            <!-- <filenamePattern>Q%s.java</filenamePattern>-->
                         </generator>
                     </generators>
                 </configuration>
@@ -109,6 +121,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>
