@@ -18,6 +18,9 @@ public class Application {
 
     @Bean
     public CommandLineRunner commandLineRunner(List<Example> examples) {
-        return args -> examples.forEach(Example::run);
+        return args -> examples.forEach(example -> {
+            System.out.println("Running Example: "+example.getClass().getName());
+            example.run();
+        });
     }
 }
