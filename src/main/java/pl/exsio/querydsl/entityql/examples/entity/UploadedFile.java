@@ -1,6 +1,7 @@
 package pl.exsio.querydsl.entityql.examples.entity;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.UUID;
 
 @Entity
@@ -38,5 +39,13 @@ public class UploadedFile {
 
     void setData(byte[] data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "UploadedFile{" +
+                "id=" + id +
+                ", data=" + Arrays.toString(data) +
+                '}';
     }
 }

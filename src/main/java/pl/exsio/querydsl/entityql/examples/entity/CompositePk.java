@@ -42,4 +42,13 @@ public class CompositePk implements Serializable {
     String getDesc() {
         return desc;
     }
+
+    @Override
+    public String toString() {
+        return "CompositePk{" +
+                "id1=" + id1 +
+                ", id2='" + id2 + '\'' +
+                ", desc='" + desc + '\'' +
+                '}';
+    }
 }

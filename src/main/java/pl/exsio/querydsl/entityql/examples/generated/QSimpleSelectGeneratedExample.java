@@ -22,7 +22,7 @@ public class QSimpleSelectGeneratedExample implements Example {
         this.queryFactory = queryFactory;
     }
 
-    public void getAllRowsFromAnEntity() {
+    private void getAllRowsFromAnEntity() {
         QBook book = QBook.INSTANCE;
         List<Book> books = queryFactory.query()
                 .select(
@@ -38,7 +38,7 @@ public class QSimpleSelectGeneratedExample implements Example {
         System.out.println(books);
     }
 
-    public void getOneRowFromAnEntity() {
+    private void getOneRowFromAnEntity() {
         QBook book = QBook.INSTANCE;
         Book result = queryFactory.query()
                 .select(
@@ -55,7 +55,7 @@ public class QSimpleSelectGeneratedExample implements Example {
         System.out.println(result);
     }
 
-    public void getAllRowsFromAnEntityBasedOnAnEnumStringFilter() {
+    private void getAllRowsFromAnEntityBasedOnAnEnumStringFilter() {
         QUser user = QUser.INSTANCE;
 
         String userName = queryFactory.query()
@@ -66,7 +66,7 @@ public class QSimpleSelectGeneratedExample implements Example {
         System.out.println(userName);
     }
 
-    public void getAllRowsFromAnEntityBasedOnAnEnumOrdinalFilter() {
+    private void getAllRowsFromAnEntityBasedOnAnEnumOrdinalFilter() {
 
         QUser user = QUser.INSTANCE;
 
@@ -78,7 +78,7 @@ public class QSimpleSelectGeneratedExample implements Example {
         System.out.println(userName);
     }
 
-    public void getGenericFields() {
+    private void getGenericFields() {
         QUser user = QUser.INSTANCE;
         Object createdBy = queryFactory.query()
                 .select(user.createdBy)
@@ -88,7 +88,7 @@ public class QSimpleSelectGeneratedExample implements Example {
         System.out.println(createdBy);
     }
 
-    public void getUnknownFields() {
+    private void getUnknownFields() {
         QUser user = QUser.INSTANCE;
 
         Date createdBy = queryFactory.query()
