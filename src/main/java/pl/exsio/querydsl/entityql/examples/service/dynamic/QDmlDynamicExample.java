@@ -96,7 +96,7 @@ public class QDmlDynamicExample implements Example {
                 .execute();
 
         UploadedFile uploadedFile = queryFactory.select(
-                constructor(UploadedFile.class, file.<byte[]>array("data"), file.uuid("id")))
+                constructor(UploadedFile.class, file.<byte[], Byte>array("data"), file.uuid("id")))
                 .from(file)
                 .where(file.uuid("id").eq(id))
                 .fetchOne();
