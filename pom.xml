@@ -47,10 +47,19 @@
             <artifactId>querydsl-sql</artifactId>
             <version>4.2.2</version>
         </dependency>
+
+        <!-- dependencies required by EntityQL when using JPA Annotations-->
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.1-api</artifactId>
             <version>1.0.2.Final</version>
+        </dependency>
+
+        <!-- dependencies required by EntityQL when using Spring Data JDBC -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jdbc</artifactId>
+            <version>1.1.1.RELEASE</version>
         </dependency>
 
         <!-- dependencies required by EntityQL when used with Spring -->
@@ -109,8 +118,20 @@
                 <configuration>
                     <generators>
                         <generator>
-                            <sourcePackage>pl.exsio.querydsl.entityql.examples.entity</sourcePackage>
-                            <destinationPackage>pl.exsio.querydsl.entityql.examples.entity.generated</destinationPackage>
+                            <type>JPA</type>
+                            <sourcePackage>pl.exsio.querydsl.entityql.examples.jpa.entity</sourcePackage>
+                            <destinationPackage>pl.exsio.querydsl.entityql.examples.jpa.entity.generated</destinationPackage>
+                            <!-- below settings are not required. If not provided, will have the below, default values -->
+                            <!-- <destinationPath>${project.basedir}\src\main\java</destinationPath>-->
+                            <!-- <filenamePattern>Q%s.java</filenamePattern>-->
+                        </generator>
+                        <generator>
+                            <type>SPRING_DATA_JDBC</type>
+                            <sourcePackage>pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity</sourcePackage>
+                            <destinationPackage>pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.generated</destinationPackage>
+                            <params>
+                                <namingStrategy>pl.exsio.querydsl.entityql.jdbc.UpperCaseWithUnderscoresNamingStrategy</namingStrategy>
+                            </params>
                             <!-- below settings are not required. If not provided, will have the below, default values -->
                             <!-- <destinationPath>${project.basedir}\src\main\java</destinationPath>-->
                             <!-- <filenamePattern>Q%s.java</filenamePattern>-->
