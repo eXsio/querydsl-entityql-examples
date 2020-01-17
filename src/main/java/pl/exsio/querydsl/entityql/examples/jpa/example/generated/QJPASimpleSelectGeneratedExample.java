@@ -1,4 +1,4 @@
-package pl.exsio.querydsl.entityql.examples.jpa.service.generated;
+package pl.exsio.querydsl.entityql.examples.jpa.example.generated;
 
 import com.querydsl.sql.SQLQueryFactory;
 import org.springframework.stereotype.Service;
@@ -15,11 +15,11 @@ import java.util.List;
 import static com.querydsl.core.types.Projections.constructor;
 
 @Service
-public class QSimpleSelectGeneratedExample implements Example {
+public class QJPASimpleSelectGeneratedExample implements Example {
 
     private final SQLQueryFactory queryFactory;
 
-    public QSimpleSelectGeneratedExample(SQLQueryFactory queryFactory) {
+    public QJPASimpleSelectGeneratedExample(SQLQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
     }
 

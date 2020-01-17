@@ -1,4 +1,4 @@
-package pl.exsio.querydsl.entityql.examples.jpa.service.mixed;
+package pl.exsio.querydsl.entityql.examples.jpa.example.mixed;
 
 import com.querydsl.sql.SQLQueryFactory;
 import org.springframework.stereotype.Service;

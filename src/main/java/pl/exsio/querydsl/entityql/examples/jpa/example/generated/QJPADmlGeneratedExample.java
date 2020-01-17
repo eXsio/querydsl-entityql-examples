@@ -1,4 +1,4 @@
-package pl.exsio.querydsl.entityql.examples.jpa.service.generated;
+package pl.exsio.querydsl.entityql.examples.jpa.example.generated;
 
 import com.querydsl.sql.SQLQueryFactory;
 import com.querydsl.sql.dml.SQLUpdateClause;
@@ -16,11 +16,11 @@ import java.util.stream.IntStream;
 import static com.querydsl.core.types.Projections.constructor;
 
 @Service
-public class QDmlGeneratedExample implements Example {
+public class QJPADmlGeneratedExample implements Example {
 
     private final SQLQueryFactory queryFactory;
 
-    public QDmlGeneratedExample(SQLQueryFactory queryFactory) {
+    public QJPADmlGeneratedExample(SQLQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
     }
 

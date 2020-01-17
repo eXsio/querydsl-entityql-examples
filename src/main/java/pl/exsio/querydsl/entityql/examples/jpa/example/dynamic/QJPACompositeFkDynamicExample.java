@@ -1,43 +1,43 @@
-package pl.exsio.querydsl.entityql.examples.jpa.service.generated;
+package pl.exsio.querydsl.entityql.examples.jpa.example.dynamic;
 
 import com.querydsl.sql.SQLQueryFactory;
 import org.springframework.stereotype.Service;
+import pl.exsio.querydsl.entityql.EntityQL;
+import pl.exsio.querydsl.entityql.Q;
 import pl.exsio.querydsl.entityql.examples.Example;
+import pl.exsio.querydsl.entityql.examples.jpa.entity.CompositeFk;
 import pl.exsio.querydsl.entityql.examples.jpa.entity.CompositePk;
 import pl.exsio.querydsl.entityql.examples.jpa.entity.SingularPk;
-import pl.exsio.querydsl.entityql.examples.jpa.entity.generated.QCompositeFk;
-import pl.exsio.querydsl.entityql.examples.jpa.entity.generated.QCompositePk;
-import pl.exsio.querydsl.entityql.examples.jpa.entity.generated.QSingularPk;
 
 import java.util.List;
 
 import static com.querydsl.core.types.Projections.constructor;
 
 @Service
-class QCompositeFkGeneratedExample implements Example {
+class QJPACompositeFkDynamicExample implements Example {
 
     private final SQLQueryFactory queryFactory;
 
-    public QCompositeFkGeneratedExample(SQLQueryFactory queryFactory) {
+    public QJPACompositeFkDynamicExample(SQLQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
     }
 
     private void getAllRowsFromAnEntityBasedOnCompositeFKJoinToCompositePK() {
 
-        QCompositePk compositePk = QCompositePk.INSTANCE;
-        QCompositeFk compositeFk = QCompositeFk.INSTANCE;
+        Q<CompositePk> compositePk = EntityQL.qEntity(CompositePk.class);
+        Q<CompositeFk> compositeFk = EntityQL.qEntity(CompositeFk.class);
 
         List<CompositePk> pks = queryFactory.query()
                 .select(
                         constructor(
                                 CompositePk.class,
-                                compositePk.id1,
-                                compositePk.id2,
-                                compositePk.desc
+                                compositePk.longNumber("id1"),
+                                compositePk.string("id2"),
+                                compositePk.string("desc")
                         ))
                 .from(compositeFk)
-                .innerJoin(compositeFk.compositePk, compositePk)
-                .where(compositeFk.desc.eq("fkd2"))
+                .innerJoin(compositeFk.<CompositePk>joinColumn("compositePk"), compositePk)
+                .where(compositeFk.string("desc").eq("fkd2"))
                 .fetch();
 
         System.out.println(pks);
@@ -46,20 +46,20 @@ class QCompositeFkGeneratedExample implements Example {
 
     private void getAllRowsFromAnEntityBasedOnCompositeFKJoinToSingularPK() {
 
-        QSingularPk singularPk = QSingularPk.INSTANCE;
-        QCompositeFk compositeFk = QCompositeFk.INSTANCE;
+        Q<SingularPk> singularPk = EntityQL.qEntity(SingularPk.class);
+        Q<CompositeFk> compositeFk = EntityQL.qEntity(CompositeFk.class);
 
         List<SingularPk> pks = queryFactory.query()
                 .select(
                         constructor(
                                 SingularPk.class,
-                                singularPk.id1,
-                                singularPk.id2,
-                                singularPk.desc
+                                singularPk.longNumber("id1"),
+                                singularPk.string("id2"),
+                                singularPk.string("desc")
                         ))
                 .from(compositeFk)
-                .innerJoin(compositeFk.singularPk, singularPk)
-                .where(compositeFk.desc.eq("fkd2"))
+                .innerJoin(compositeFk.<SingularPk>joinColumn("singularPk"), singularPk)
+                .where(compositeFk.string("desc").eq("fkd2"))
                 .fetch();
 
         System.out.println(pks);

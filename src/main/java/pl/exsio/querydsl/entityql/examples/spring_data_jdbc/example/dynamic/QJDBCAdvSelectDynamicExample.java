@@ -1,4 +1,4 @@
-package pl.exsio.querydsl.entityql.examples.jpa.service.dynamic;
+package pl.exsio.querydsl.entityql.examples.spring_data_jdbc.example.dynamic;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.sql.SQLExpressions;
@@ -6,12 +6,15 @@ import com.querydsl.sql.SQLQueryFactory;
 import org.springframework.stereotype.Service;
 import pl.exsio.querydsl.entityql.EntityQL;
 import pl.exsio.querydsl.entityql.Q;
+import pl.exsio.querydsl.entityql.entity.scanner.QEntityScanner;
+import pl.exsio.querydsl.entityql.entity.scanner.SpringDataJdbcQEntityScanner;
 import pl.exsio.querydsl.entityql.examples.Example;
 import pl.exsio.querydsl.entityql.examples.dto.OrderItemBookCountDto;
-import pl.exsio.querydsl.entityql.examples.jpa.entity.Book;
-import pl.exsio.querydsl.entityql.examples.jpa.entity.Order;
-import pl.exsio.querydsl.entityql.examples.jpa.entity.OrderItem;
-import pl.exsio.querydsl.entityql.examples.jpa.entity.User;
+import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.Book;
+import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.Order;
+import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.OrderItem;
+import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.User;
+import pl.exsio.querydsl.entityql.jdbc.UpperCaseWithUnderscoresNamingStrategy;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -19,17 +22,19 @@ import java.util.List;
 import static com.querydsl.sql.SQLExpressions.count;
 
 @Service
-class QAdvSelectDynamicExample implements Example {
+class QJDBCAdvSelectDynamicExample implements Example {
 
     private final SQLQueryFactory queryFactory;
 
-    public QAdvSelectDynamicExample(SQLQueryFactory queryFactory) {
+    private final QEntityScanner scanner = new SpringDataJdbcQEntityScanner(new UpperCaseWithUnderscoresNamingStrategy());
+
+    public QJDBCAdvSelectDynamicExample(SQLQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
     }
 
     private void useAggregateFunctions() {
 
-        Q<OrderItem> orderItem = EntityQL.qEntity(OrderItem.class);
+        Q<OrderItem> orderItem = EntityQL.qEntity(OrderItem.class, scanner);
 
         List<OrderItemBookCountDto> result = queryFactory
                 .select(
@@ -47,10 +52,10 @@ class QAdvSelectDynamicExample implements Example {
 
     private void useSubQueries() {
 
-        Q<User> user = EntityQL.qEntity(User.class);
-        Q<Book> book = EntityQL.qEntity(Book.class);
-        Q<Order> order = EntityQL.qEntity(Order.class);
-        Q<OrderItem> orderItem = EntityQL.qEntity(OrderItem.class);
+        Q<User> user = EntityQL.qEntity(User.class, scanner);
+        Q<Book> book = EntityQL.qEntity(Book.class, scanner);
+        Q<Order> order = EntityQL.qEntity(Order.class, scanner);
+        Q<OrderItem> orderItem = EntityQL.qEntity(OrderItem.class, scanner);
 
         List<String> result = queryFactory.select(user.string("name"))
                 .from(user)
@@ -68,9 +73,9 @@ class QAdvSelectDynamicExample implements Example {
 
     private void useNestedSelects() {
 
-        Q<Book> book = EntityQL.qEntity(Book.class);
-        Q<Order> order = EntityQL.qEntity(Order.class);
-        Q<OrderItem> orderItem = EntityQL.qEntity(OrderItem.class);
+        Q<Book> book = EntityQL.qEntity(Book.class, scanner);
+        Q<Order> order = EntityQL.qEntity(Order.class, scanner);
+        Q<OrderItem> orderItem = EntityQL.qEntity(OrderItem.class, scanner);
 
         Long result = queryFactory.select(count())
                 .from(

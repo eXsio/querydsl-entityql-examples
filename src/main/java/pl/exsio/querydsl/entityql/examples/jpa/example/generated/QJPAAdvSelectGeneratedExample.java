@@ -1,4 +1,4 @@
-package pl.exsio.querydsl.entityql.examples.jpa.service.generated;
+package pl.exsio.querydsl.entityql.examples.jpa.example.generated;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.sql.SQLExpressions;
@@ -17,11 +17,11 @@ import java.util.List;
 import static com.querydsl.sql.SQLExpressions.count;
 
 @Service
-class QAdvSelectGeneratedExample implements Example {
+class QJPAAdvSelectGeneratedExample implements Example {
 
     private final SQLQueryFactory queryFactory;
 
-    public QAdvSelectGeneratedExample(SQLQueryFactory queryFactory) {
+    public QJPAAdvSelectGeneratedExample(SQLQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
     }
 

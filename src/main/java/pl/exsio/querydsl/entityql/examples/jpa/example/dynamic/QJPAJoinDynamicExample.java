@@ -1,4 +1,4 @@
-package pl.exsio.querydsl.entityql.examples.jpa.service.dynamic;
+package pl.exsio.querydsl.entityql.examples.jpa.example.dynamic;
 
 import com.querydsl.sql.SQLQueryFactory;
 import org.springframework.stereotype.Service;
@@ -13,11 +13,11 @@ import static com.querydsl.core.types.Projections.constructor;
 import static pl.exsio.querydsl.entityql.EntityQL.dto;
 
 @Service
-public class QJoinDynamicExample implements Example {
+public class QJPAJoinDynamicExample implements Example {
 
     private final SQLQueryFactory queryFactory;
 
-    public QJoinDynamicExample(SQLQueryFactory queryFactory) {
+    public QJPAJoinDynamicExample(SQLQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
     }
 

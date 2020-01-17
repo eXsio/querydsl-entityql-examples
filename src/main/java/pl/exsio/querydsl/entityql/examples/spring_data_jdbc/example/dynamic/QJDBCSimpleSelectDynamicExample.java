@@ -1,14 +1,17 @@
-package pl.exsio.querydsl.entityql.examples.jpa.service.dynamic;
+package pl.exsio.querydsl.entityql.examples.spring_data_jdbc.example.dynamic;
 
 import com.querydsl.sql.SQLQueryFactory;
 import org.springframework.stereotype.Service;
 import pl.exsio.querydsl.entityql.EntityQL;
 import pl.exsio.querydsl.entityql.Q;
+import pl.exsio.querydsl.entityql.entity.scanner.QEntityScanner;
+import pl.exsio.querydsl.entityql.entity.scanner.SpringDataJdbcQEntityScanner;
 import pl.exsio.querydsl.entityql.examples.Example;
-import pl.exsio.querydsl.entityql.examples.jpa.entity.Book;
-import pl.exsio.querydsl.entityql.examples.jpa.entity.User;
 import pl.exsio.querydsl.entityql.examples.enums.by_name.UserTypeByName;
 import pl.exsio.querydsl.entityql.examples.enums.by_ordinal.UserTypeByOrdinal;
+import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.Book;
+import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.User;
+import pl.exsio.querydsl.entityql.jdbc.UpperCaseWithUnderscoresNamingStrategy;
 
 import java.sql.Date;
 import java.util.List;
@@ -16,16 +19,18 @@ import java.util.List;
 import static com.querydsl.core.types.Projections.constructor;
 
 @Service
-public class QSimpleSelectDynamicExample implements Example {
-    
+public class QJDBCSimpleSelectDynamicExample implements Example {
+
     private final SQLQueryFactory queryFactory;
 
-    public QSimpleSelectDynamicExample(SQLQueryFactory queryFactory) {
+    private final QEntityScanner scanner = new SpringDataJdbcQEntityScanner(new UpperCaseWithUnderscoresNamingStrategy());
+
+    public QJDBCSimpleSelectDynamicExample(SQLQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
     }
 
     public void getAllRowsFromAnEntity() {
-        Q<Book> book = EntityQL.qEntity(Book.class);
+        Q<Book> book = EntityQL.qEntity(Book.class, scanner);
         List<Book> books = queryFactory.query()
                 .select(
                         constructor(
@@ -41,7 +46,7 @@ public class QSimpleSelectDynamicExample implements Example {
     }
 
     public void getOneRowFromAnEntity() {
-        Q<Book> book = EntityQL.qEntity(Book.class);
+        Q<Book> book = EntityQL.qEntity(Book.class, scanner);
         Book result = queryFactory.query()
                 .select(
                         constructor(
@@ -58,7 +63,7 @@ public class QSimpleSelectDynamicExample implements Example {
     }
 
     public void getAllRowsFromAnEntityBasedOnAnEnumStringFilter() {
-        Q<User> user = EntityQL.qEntity(User.class);
+        Q<User> user = EntityQL.qEntity(User.class, scanner);
 
         String userName = queryFactory.query()
                 .select(user.string("name"))
@@ -70,7 +75,7 @@ public class QSimpleSelectDynamicExample implements Example {
 
     public void getAllRowsFromAnEntityBasedOnAnEnumOrdinalFilter() {
 
-        Q<User> user = EntityQL.qEntity(User.class);
+        Q<User> user = EntityQL.qEntity(User.class, scanner);
 
 
         String userName = queryFactory.query()
@@ -82,7 +87,7 @@ public class QSimpleSelectDynamicExample implements Example {
     }
 
     public void getGenericFields() {
-        Q<User> user = EntityQL.qEntity(User.class);
+        Q<User> user = EntityQL.qEntity(User.class, scanner);
         String createdBy = queryFactory.query()
                 .select(user.<String> column("createdBy"))
                 .where(user.<UserTypeByName> enumerated("typeStr").eq(UserTypeByName.ADMIN))
@@ -92,7 +97,7 @@ public class QSimpleSelectDynamicExample implements Example {
     }
 
     public void getUnknownFields() {
-        Q<User> user = EntityQL.qEntity(User.class);
+        Q<User> user = EntityQL.qEntity(User.class, scanner);
 
         Date createdBy = queryFactory.query()
                 .select(user.<Date> column("createdAt"))
