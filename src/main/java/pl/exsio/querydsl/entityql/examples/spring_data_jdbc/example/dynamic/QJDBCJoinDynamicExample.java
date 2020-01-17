@@ -7,7 +7,9 @@ import pl.exsio.querydsl.entityql.Q;
 import pl.exsio.querydsl.entityql.entity.scanner.QEntityScanner;
 import pl.exsio.querydsl.entityql.entity.scanner.SpringDataJdbcQEntityScanner;
 import pl.exsio.querydsl.entityql.examples.Example;
-import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.*;
+import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.Book;
+import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.Order;
+import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.OrderItem;
 import pl.exsio.querydsl.entityql.jdbc.UpperCaseWithUnderscoresNamingStrategy;
 
 import java.util.List;

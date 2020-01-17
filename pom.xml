@@ -125,6 +125,7 @@
                 <configuration>
                     <generators>
                         <generator>
+                            <!-- Generator configuration for JPA based Entities -->
                             <type>JPA</type>
                             <sourcePackage>pl.exsio.querydsl.entityql.examples.jpa.entity</sourcePackage>
                             <destinationPackage>pl.exsio.querydsl.entityql.examples.jpa.entity.generated</destinationPackage>
@@ -132,10 +133,16 @@
                             <!-- <destinationPath>${project.basedir}\src\main\java</destinationPath>-->
                             <!-- <filenamePattern>Q%s.java</filenamePattern>-->
                         </generator>
+                        <!-- Generator configuration for Spring Data JDBC based Entities -->
                         <generator>
                             <type>SPRING_DATA_JDBC</type>
                             <sourcePackage>pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity</sourcePackage>
                             <destinationPackage>pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.generated</destinationPackage>
+                            <!-- out of the box you can use one of the 2 provided naming strategies
+                                - pl.exsio.querydsl.entityql.jdbc.UpperCaseWithUnderscoresNamingStrategy
+                                - pl.exsio.querydsl.entityql.jdbc.DefaultNamingStrategy
+                                If you want to use your own custom one, you will have to add a new <dependency/> that contains it
+                            -->
                             <params>
                                 <namingStrategy>pl.exsio.querydsl.entityql.jdbc.UpperCaseWithUnderscoresNamingStrategy</namingStrategy>
                             </params>

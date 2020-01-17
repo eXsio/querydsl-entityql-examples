@@ -30,7 +30,7 @@ public class SpringContext {
 
     /**
      * Entity Manager is needed only for creating and populating H2 database.
-     * For normal use cases its presence is not required.
+     * For normal (production) use cases its presence is not required.
      */
     @Bean
     static LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
@@ -69,8 +69,19 @@ public class SpringContext {
      */
     @Bean
     static SQLQueryFactory queryFactory(DataSource dataSource, SQLTemplates sqlTemplates) {
+        /*
+         * EntityQlQueryFactory is preconfigured to work seamlessly with Spring's Transaction Management
+         */
         return new EntityQlQueryFactory(new com.querydsl.sql.Configuration(sqlTemplates), dataSource)
+                /*
+                 * all Java Enums from the below package will be mapped to a String/Varchar column that
+                 * represents a name() value of that Enum constant
+                 */
                 .registerEnumsByName("pl.exsio.querydsl.entityql.examples.enums.by_name")
+                /*
+                 * all Java Enums from the below package will be mapped to an Integer column that
+                 * represents an ordinal() value of that Enum constant
+                 */
                 .registerEnumsByOrdinal("pl.exsio.querydsl.entityql.examples.enums.by_ordinal");
     }
 }

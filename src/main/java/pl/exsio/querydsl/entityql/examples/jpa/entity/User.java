@@ -16,7 +16,6 @@ public class User<T> {
 
     @Id
     @Column(name = "USER_ID")
-    @GeneratedValue
     private Long id;
 
     @Column(name = "NAME")

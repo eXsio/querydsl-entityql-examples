@@ -5,10 +5,10 @@ import org.springframework.stereotype.Service;
 import pl.exsio.querydsl.entityql.EntityQL;
 import pl.exsio.querydsl.entityql.Q;
 import pl.exsio.querydsl.entityql.examples.Example;
-import pl.exsio.querydsl.entityql.examples.jpa.entity.Book;
-import pl.exsio.querydsl.entityql.examples.jpa.entity.User;
 import pl.exsio.querydsl.entityql.examples.enums.by_name.UserTypeByName;
 import pl.exsio.querydsl.entityql.examples.enums.by_ordinal.UserTypeByOrdinal;
+import pl.exsio.querydsl.entityql.examples.jpa.entity.Book;
+import pl.exsio.querydsl.entityql.examples.jpa.entity.User;
 
 import java.sql.Date;
 import java.util.List;

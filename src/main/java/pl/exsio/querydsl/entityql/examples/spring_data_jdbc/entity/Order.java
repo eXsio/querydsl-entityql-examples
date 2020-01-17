@@ -2,7 +2,6 @@ package pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity;
 
 import org.springframework.data.annotation.Id;
 
-import javax.annotation.Nonnull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

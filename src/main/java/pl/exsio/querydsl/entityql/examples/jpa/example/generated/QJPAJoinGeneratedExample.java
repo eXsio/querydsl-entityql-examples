@@ -3,7 +3,8 @@ package pl.exsio.querydsl.entityql.examples.jpa.example.generated;
 import com.querydsl.sql.SQLQueryFactory;
 import org.springframework.stereotype.Service;
 import pl.exsio.querydsl.entityql.examples.Example;
-import pl.exsio.querydsl.entityql.examples.jpa.entity.*;
+import pl.exsio.querydsl.entityql.examples.jpa.entity.Book;
+import pl.exsio.querydsl.entityql.examples.jpa.entity.Group;
 import pl.exsio.querydsl.entityql.examples.jpa.entity.generated.*;
 
 import java.util.List;

@@ -1,6 +1,9 @@
 package pl.exsio.querydsl.entityql.examples.jpa.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity
@@ -9,12 +12,10 @@ public class Book {
 
     @Id
     @Column(name = "BOOK_ID")
-    @GeneratedValue
     private Long id;
 
     @Column(name = "NAME", unique = true)
     private String name;
-
 
     @Column(name = "DESC", nullable = true, columnDefinition = "CLOB")
     private String desc;

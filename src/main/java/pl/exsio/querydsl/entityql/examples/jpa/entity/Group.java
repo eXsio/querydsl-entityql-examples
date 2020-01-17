@@ -9,7 +9,6 @@ public class Group {
 
     @Id
     @Column(name = "GROUP_ID")
-    @GeneratedValue
     private Long id;
 
     @Column(name = "NAME")

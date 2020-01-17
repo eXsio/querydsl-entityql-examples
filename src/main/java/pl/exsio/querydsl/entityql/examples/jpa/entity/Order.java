@@ -11,7 +11,6 @@ public class Order implements Serializable {
 
     @Id
     @Column(name = "ORDER_ID")
-    @GeneratedValue
     private Long id;
 
     @OneToOne

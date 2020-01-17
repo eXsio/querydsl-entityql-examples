@@ -12,7 +12,6 @@ public class OrderItem implements Serializable {
 
     @Id
     @Column(name = "ORDER_ITEM_ID")
-    @GeneratedValue
     private Long id;
 
     @ManyToOne

@@ -1,26 +1,23 @@
-package pl.exsio.querydsl.entityql.examples.jpa.example.mixed;
+package pl.exsio.querydsl.entityql.examples.spring_data_jdbc.example.generated;
 
 import com.querydsl.sql.SQLQueryFactory;
 import org.springframework.stereotype.Service;
-import pl.exsio.querydsl.entityql.Q;
 import pl.exsio.querydsl.entityql.examples.Example;
-import pl.exsio.querydsl.entityql.examples.jpa.entity.Book;
-import pl.exsio.querydsl.entityql.examples.jpa.entity.OrderItem;
-import pl.exsio.querydsl.entityql.examples.jpa.entity.generated.QBook;
-import pl.exsio.querydsl.entityql.examples.jpa.entity.generated.QOrder;
-import pl.exsio.querydsl.entityql.examples.jpa.entity.generated.QOrderItem;
+import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.Book;
+import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.generated.QBook;
+import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.generated.QOrder;
+import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.generated.QOrderItem;
 
 import java.util.List;
 
 import static com.querydsl.core.types.Projections.constructor;
-import static pl.exsio.querydsl.entityql.EntityQL.qEntity;
 
 @Service
-public class QMixedExample implements Example {
+public class QJDBCJoinGeneratedExample implements Example {
 
     private final SQLQueryFactory queryFactory;
 
-    public QMixedExample(SQLQueryFactory queryFactory) {
+    public QJDBCJoinGeneratedExample(SQLQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
     }
 
@@ -28,7 +25,7 @@ public class QMixedExample implements Example {
 
         QBook book = QBook.INSTANCE;
         QOrder order = QOrder.INSTANCE;
-        Q<OrderItem> orderItem = qEntity(OrderItem.class);
+        QOrderItem orderItem = QOrderItem.INSTANCE;
 
         List<Book> books = queryFactory.query()
                 .select(
@@ -40,8 +37,8 @@ public class QMixedExample implements Example {
                                 book.price
                         ))
                 .from(book)
-                .innerJoin(orderItem).on(orderItem.longNumber("bookId").eq(book.id))
-                .innerJoin(order).on(orderItem.longNumber("orderId").eq(order.id))
+                .innerJoin(orderItem).on(orderItem.bookId.eq(book.id))
+                .innerJoin(order).on(orderItem.orderId.eq(order.id))
                 .where(order.id.eq(1L))
                 .fetch();
 
@@ -50,29 +47,27 @@ public class QMixedExample implements Example {
 
     private void getAllRowsFromAnEntityBasedOnFKJoin() {
 
-        Q<Book> book = QBook.INSTANCE.dynamic();
+        QBook book = QBook.INSTANCE;
         QOrder order = QOrder.INSTANCE;
-        Q<OrderItem> orderItem = QOrderItem.INSTANCE.dynamic();
+        QOrderItem orderItem = QOrderItem.INSTANCE;
 
         List<Book> books = queryFactory.query()
                 .select(
                         constructor(
                                 Book.class,
-                                book.longNumber("id"),
-                                book.string("name"),
-                                book.string("desc"),
-                                book.decimalNumber("price")
+                                book.id,
+                                book.name,
+                                book.desc,
+                                book.price
                         ))
                 .from(orderItem)
-                .innerJoin(orderItem.joinColumn("book"), book)
-                .innerJoin(orderItem.joinColumn("order"), order)
+                .innerJoin(orderItem.book, book)
+                .innerJoin(orderItem.order, order)
                 .where(order.id.eq(2L))
                 .fetch();
 
         System.out.println(books);
     }
-
-
 
     @Override
     public void run() {

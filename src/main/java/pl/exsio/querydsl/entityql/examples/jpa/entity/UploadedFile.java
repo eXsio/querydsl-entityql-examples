@@ -10,7 +10,6 @@ public class UploadedFile {
 
     @Id
     @Column(name = "FILE_ID", nullable = false, columnDefinition = "UUID")
-    @GeneratedValue
     private UUID id;
 
     @Lob
