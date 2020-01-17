@@ -21,31 +21,14 @@ import java.util.Properties;
 @Configuration
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
-public class SpringContext {
+public class EntityQlConfiguration {
 
+    /**
+     * Your Datasource
+     */
     @Bean
     static DataSource dataSource() {
         return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).build();
-    }
-
-    /**
-     * Entity Manager is needed only for creating and populating H2 database.
-     * For normal (production) use cases its presence is not required.
-     */
-    @Bean
-    static LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
-        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-
-        em.setDataSource(dataSource);
-        em.setPackagesToScan("pl.exsio.querydsl.entityql");
-        em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-
-        Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create");
-        properties.setProperty("hibernate.hbm2ddl.import_files", "data.sql");
-        em.setJpaProperties(properties);
-
-        return em;
     }
 
     /**
