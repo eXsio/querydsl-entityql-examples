@@ -7,6 +7,8 @@ import pl.exsio.querydsl.entityql.Q;
 import pl.exsio.querydsl.entityql.examples.Example;
 import pl.exsio.querydsl.entityql.examples.entity.Book;
 import pl.exsio.querydsl.entityql.examples.entity.User;
+import pl.exsio.querydsl.entityql.examples.enums.by_name.UserTypeByName;
+import pl.exsio.querydsl.entityql.examples.enums.by_ordinal.UserTypeByOrdinal;
 
 import java.sql.Date;
 import java.util.List;
@@ -60,7 +62,7 @@ public class QSimpleSelectDynamicExample implements Example {
 
         String userName = queryFactory.query()
                 .select(user.string("name"))
-                .where(user.<User.Type> enumerated("typeStr").eq(User.Type.ADMIN))
+                .where(user.<UserTypeByName> enumerated("typeStr").eq(UserTypeByName.ADMIN))
                 .from(user).fetchOne();
 
         System.out.println(userName);
@@ -73,7 +75,7 @@ public class QSimpleSelectDynamicExample implements Example {
 
         String userName = queryFactory.query()
                 .select(user.string("name"))
-                .where(user.intNumber("typeOrd").eq(User.Type.ADMIN.ordinal()))
+                .where(user.<UserTypeByOrdinal> enumerated("typeOrd").eq(UserTypeByOrdinal.ADMIN))
                 .from(user).fetchOne();
 
         System.out.println(userName);
@@ -83,7 +85,7 @@ public class QSimpleSelectDynamicExample implements Example {
         Q<User> user = EntityQL.qEntity(User.class);
         String createdBy = queryFactory.query()
                 .select(user.<String> column("createdBy"))
-                .where(user.<User.Type> enumerated("typeStr").eq(User.Type.ADMIN))
+                .where(user.<UserTypeByName> enumerated("typeStr").eq(UserTypeByName.ADMIN))
                 .from(user).fetchOne();
 
         System.out.println(createdBy);
@@ -94,7 +96,7 @@ public class QSimpleSelectDynamicExample implements Example {
 
         Date createdBy = queryFactory.query()
                 .select(user.<Date> column("createdAt"))
-                .where(user.<User.Type> enumerated("typeStr").eq(User.Type.ADMIN))
+                .where(user.<UserTypeByName> enumerated("typeStr").eq(UserTypeByName.ADMIN))
                 .from(user).fetchOne();
 
         System.out.println(createdBy);

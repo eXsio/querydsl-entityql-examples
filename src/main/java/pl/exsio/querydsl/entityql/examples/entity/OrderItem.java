@@ -36,36 +36,4 @@ public class OrderItem implements Serializable {
         this.quantity = quantity;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
-    }
-
-    public Long getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
-    }
-
-    public Order getShoppingOrder() {
-        return order;
-    }
-
-    public void setShoppingOrder(Order order) {
-        this.order = order;
-    }
-
 }

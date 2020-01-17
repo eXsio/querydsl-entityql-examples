@@ -25,22 +25,6 @@ public class UploadedFile {
         this.data = data;
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    byte[] getData() {
-        return data;
-    }
-
-    void setData(byte[] data) {
-        this.data = data;
-    }
-
     @Override
     public String toString() {
         return "UploadedFile{" +

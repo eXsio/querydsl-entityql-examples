@@ -31,18 +31,6 @@ public class CompositePk implements Serializable {
         this.desc = desc;
     }
 
-    Long getId1() {
-        return id1;
-    }
-
-    String getId2() {
-        return id2;
-    }
-
-    String getDesc() {
-        return desc;
-    }
-
     @Override
     public String toString() {
         return "CompositePk{" +
