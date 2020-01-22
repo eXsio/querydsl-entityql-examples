@@ -62,6 +62,7 @@ public final class QUser extends QStaticModel<User> {
       this.id = QPathFactory.<NumberPath<Long>>create(this, config);
 
       addMetadata(this.id, QColumnMetadataFactory.create(config));
+      this.columnsMap.put("id", this.id);
     }
 
     name:
@@ -71,6 +72,7 @@ public final class QUser extends QStaticModel<User> {
       this.name = QPathFactory.<StringPath>create(this, config);
 
       addMetadata(this.name, QColumnMetadataFactory.create(config));
+      this.columnsMap.put("name", this.name);
     }
 
     typeStr:
@@ -81,6 +83,7 @@ public final class QUser extends QStaticModel<User> {
       this.typeStr = QPathFactory.<QEnumPath<UserTypeByName>>create(this, config);
 
       addMetadata(this.typeStr, QColumnMetadataFactory.create(config));
+      this.columnsMap.put("typeStr", this.typeStr);
     }
 
     typeOrd:
@@ -91,6 +94,7 @@ public final class QUser extends QStaticModel<User> {
       this.typeOrd = QPathFactory.<QEnumPath<UserTypeByOrdinal>>create(this, config);
 
       addMetadata(this.typeOrd, QColumnMetadataFactory.create(config));
+      this.columnsMap.put("typeOrd", this.typeOrd);
     }
 
     createdBy:
@@ -100,6 +104,7 @@ public final class QUser extends QStaticModel<User> {
       this.createdBy = QPathFactory.<QObjectPath<Object>>create(this, config);
 
       addMetadata(this.createdBy, QColumnMetadataFactory.create(config));
+      this.columnsMap.put("createdBy", this.createdBy);
     }
 
     createdAt:
@@ -109,6 +114,7 @@ public final class QUser extends QStaticModel<User> {
       this.createdAt = QPathFactory.<QObjectPath<Date>>create(this, config);
 
       addMetadata(this.createdAt, QColumnMetadataFactory.create(config));
+      this.columnsMap.put("createdAt", this.createdAt);
     }
 
     orderId:
@@ -118,11 +124,13 @@ public final class QUser extends QStaticModel<User> {
       this.orderId = QPathFactory.<NumberPath<Long>>create(this, config);
 
       addMetadata(this.orderId, QColumnMetadataFactory.create(config));
+      this.columnsMap.put("orderId", this.orderId);
     }
 
     order:
     {
       this.order = this.<Order>createForeignKey(this.orderId, "ORDER_ID");
+      this.joinColumnsMap.put("order", this.order);
     }
 
     _primaryKey:

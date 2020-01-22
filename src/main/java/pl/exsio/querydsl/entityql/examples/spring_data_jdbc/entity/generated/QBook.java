@@ -48,6 +48,7 @@ public final class QBook extends QStaticModel<Book> {
       this.id = QPathFactory.<NumberPath<Long>>create(this, config);
 
       addMetadata(this.id, QColumnMetadataFactory.create(config));
+      this.columnsMap.put("id", this.id);
     }
 
     name:
@@ -57,6 +58,7 @@ public final class QBook extends QStaticModel<Book> {
       this.name = QPathFactory.<StringPath>create(this, config);
 
       addMetadata(this.name, QColumnMetadataFactory.create(config));
+      this.columnsMap.put("name", this.name);
     }
 
     desc:
@@ -66,6 +68,7 @@ public final class QBook extends QStaticModel<Book> {
       this.desc = QPathFactory.<StringPath>create(this, config);
 
       addMetadata(this.desc, QColumnMetadataFactory.create(config));
+      this.columnsMap.put("desc", this.desc);
     }
 
     price:
@@ -75,6 +78,7 @@ public final class QBook extends QStaticModel<Book> {
       this.price = QPathFactory.<NumberPath<BigDecimal>>create(this, config);
 
       addMetadata(this.price, QColumnMetadataFactory.create(config));
+      this.columnsMap.put("price", this.price);
     }
 
     _primaryKey:
