@@ -94,7 +94,7 @@ public class QJPASimpleSelectDynamicExample implements Example {
     public void getUnknownFields() {
         Q<User> user = EntityQL.qEntity(User.class);
 
-        Date createdBy = queryFactory.query()
+        Object createdBy = queryFactory.query()
                 .select(user.<Date> column("createdAt"))
                 .where(user.<UserTypeByName> enumerated("typeStr").eq(UserTypeByName.ADMIN))
                 .from(user).fetchOne();
