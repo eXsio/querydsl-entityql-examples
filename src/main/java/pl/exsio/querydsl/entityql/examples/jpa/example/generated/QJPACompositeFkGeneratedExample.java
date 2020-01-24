@@ -66,9 +66,56 @@ class QJPACompositeFkGeneratedExample implements Example {
 
     }
 
+
+    private void getAllRowsFromAnEntityBasedOnInverseCompositeFKJoinToCompositePK() {
+
+        QCompositePk compositePk = QCompositePk.INSTANCE;
+        QCompositeFk compositeFk = QCompositeFk.INSTANCE;
+
+
+        List<CompositePk> pks = queryFactory.query()
+                .select(
+                        constructor(
+                                CompositePk.class,
+                                compositePk.id1,
+                                compositePk.id2,
+                                compositeFk.desc
+                        ))
+                .from(compositePk)
+                .innerJoin(compositePk.compositeFks, compositeFk)
+                .where(compositeFk.desc.eq("fkd2"))
+                .fetch();
+
+        System.out.println(pks);
+    }
+
+    private void getAllRowsFromAnEntityBasedOnInverseCompositeFKJoinToSingularPK() {
+
+        QSingularPk singularPk = QSingularPk.INSTANCE;
+        QCompositeFk compositeFk = QCompositeFk.INSTANCE;
+
+        List<SingularPk> pks = queryFactory.query()
+                .select(
+                        constructor(
+                                SingularPk.class,
+                                singularPk.id1,
+                                singularPk.id2,
+                                compositeFk.desc
+                        ))
+                .from(singularPk)
+                .innerJoin(singularPk.compositeFks, compositeFk)
+                .where(compositeFk.desc.eq("fkd2"))
+                .fetch();
+
+        System.out.println(pks);
+
+    }
+
     @Override
     public void run() {
         getAllRowsFromAnEntityBasedOnCompositeFKJoinToCompositePK();
         getAllRowsFromAnEntityBasedOnCompositeFKJoinToSingularPK();
+        getAllRowsFromAnEntityBasedOnInverseCompositeFKJoinToCompositePK();
+        getAllRowsFromAnEntityBasedOnInverseCompositeFKJoinToSingularPK();
     }
 }

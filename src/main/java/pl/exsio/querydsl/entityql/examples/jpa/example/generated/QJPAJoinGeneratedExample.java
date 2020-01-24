@@ -134,6 +134,56 @@ public class QJPAJoinGeneratedExample implements Example {
     }
 
 
+    private void getAllRowsFromAnEntityBasedOnInverseFKJoin() {
+
+        QBook book = QBook.INSTANCE;
+        QOrder order = QOrder.INSTANCE;
+        QOrderItem orderItem = QOrderItem.INSTANCE;
+
+        List<Book> books = queryFactory.query()
+                .select(
+                        constructor(
+                                Book.class,
+                                book.id,
+                                book.name,
+                                book.desc,
+                                book.price
+                        ))
+                .from(order)
+                .innerJoin(order.items, orderItem)
+                .innerJoin(orderItem.book, book)
+                .where(order.id.eq(2L))
+                .fetch();
+
+        System.out.println(books);
+    }
+
+    private void getAllRowsFromAnEntityBasedOnInverseFKJoinWithReferencedColumnName() {
+
+        QBook book = QBook.INSTANCE;
+        QOrder order = QOrder.INSTANCE;
+        QOrderItem orderItem = QOrderItem.INSTANCE;
+
+        List<Book> books = queryFactory.query()
+                .select(
+                        constructor(
+                                Book.class,
+                                book.id,
+                                book.name,
+                                book.desc,
+                                book.price
+                        ))
+                .from(order)
+                .innerJoin(order.itemsReferenced, orderItem)
+                .innerJoin(orderItem.book, book)
+                .where(order.id.eq(2L))
+                .fetch();
+
+        System.out.println(books);
+    }
+
+
+
     @Override
     public void run() {
         getAllRowsFromAnEntityONJoin();
@@ -141,5 +191,7 @@ public class QJPAJoinGeneratedExample implements Example {
         getAllRowsFromAnEntityBasedOnFKJoinWithCustomReferencedColumnName();
         getAllRowsFromAnEntityBasedOnJoinTableMappingUsingONClause();
         getAllRowsFromAnEntityBasedOnJoinTableMappingUsingFKJoin();
+        getAllRowsFromAnEntityBasedOnInverseFKJoin();
+        getAllRowsFromAnEntityBasedOnInverseFKJoinWithReferencedColumnName();
     }
 }

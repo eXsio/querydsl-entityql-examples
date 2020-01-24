@@ -66,9 +66,54 @@ class QJPACompositeFkDynamicExample implements Example {
 
     }
 
+    private void getAllRowsFromAnEntityBasedOnInverseCompositeFKJoinToCompositePK() {
+
+        Q<CompositePk> compositePk = EntityQL.qEntity(CompositePk.class);
+        Q<CompositeFk> compositeFk = EntityQL.qEntity(CompositeFk.class);
+
+        List<CompositePk> pks = queryFactory.query()
+                .select(
+                        constructor(
+                                CompositePk.class,
+                                compositePk.longNumber("id1"),
+                                compositePk.string("id2"),
+                                compositeFk.string("desc")
+                        ))
+                .from(compositePk)
+                .innerJoin(compositePk.<CompositeFk> inverseJoinColumn("compositeFks"), compositeFk)
+                .where(compositeFk.string("desc").eq("fkd2"))
+                .fetch();
+
+        System.out.println(pks);
+    }
+
+    private void getAllRowsFromAnEntityBasedOnInverseCompositeFKJoinToSingularPK() {
+
+        Q<SingularPk> singularPk = EntityQL.qEntity(SingularPk.class);
+        Q<CompositeFk> compositeFk = EntityQL.qEntity(CompositeFk.class);
+
+        List<SingularPk> pks = queryFactory.query()
+                .select(
+                        constructor(
+                                SingularPk.class,
+                                singularPk.longNumber("id1"),
+                                singularPk.string("id2"),
+                                compositeFk.string("desc")
+                        ))
+                .from(singularPk)
+                .innerJoin(singularPk.<CompositeFk> inverseJoinColumn("compositeFks"), compositeFk)
+                .where(compositeFk.string("desc").eq("fkd2"))
+                .fetch();
+
+        System.out.println(pks);
+
+    }
+
     @Override
     public void run() {
         getAllRowsFromAnEntityBasedOnCompositeFKJoinToCompositePK();
         getAllRowsFromAnEntityBasedOnCompositeFKJoinToSingularPK();
+        getAllRowsFromAnEntityBasedOnInverseCompositeFKJoinToCompositePK();
+        getAllRowsFromAnEntityBasedOnInverseCompositeFKJoinToSingularPK();
     }
 }

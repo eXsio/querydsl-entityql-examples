@@ -151,6 +151,54 @@ public class QJPAJoinDynamicExample implements Example {
         System.out.println(groups);
     }
 
+    private void getAllRowsFromAnEntityBasedOnInverseFKJoin() {
+
+        Q<Book> book = EntityQL.qEntity(Book.class);
+        Q<Order> order = EntityQL.qEntity(Order.class);
+        Q<OrderItem> orderItem = EntityQL.qEntity(OrderItem.class);
+
+        List<Book> books = queryFactory.query()
+                .select(
+                        constructor(
+                                Book.class,
+                                book.longNumber("id"),
+                                book.string("name"),
+                                book.string("desc"),
+                                book.decimalNumber("price")
+                        ))
+                .from(order)
+                .innerJoin(order.<OrderItem> inverseJoinColumn("items"), orderItem)
+                .innerJoin(orderItem.<Book> joinColumn("book"), book)
+                .where(order.longNumber("id").eq(2L))
+                .fetch();
+
+        System.out.println(books);
+    }
+
+    private void getAllRowsFromAnEntityBasedOnInverseFKJoinWithReferencedColumnName() {
+
+        Q<Book> book = EntityQL.qEntity(Book.class);
+        Q<Order> order = EntityQL.qEntity(Order.class);
+        Q<OrderItem> orderItem = EntityQL.qEntity(OrderItem.class);
+
+        List<Book> books = queryFactory.query()
+                .select(
+                        constructor(
+                                Book.class,
+                                book.longNumber("id"),
+                                book.string("name"),
+                                book.string("desc"),
+                                book.decimalNumber("price")
+                        ))
+                .from(order)
+                .innerJoin(order.<OrderItem> inverseJoinColumn("itemsReferenced"), orderItem)
+                .innerJoin(orderItem.<Book> joinColumn("book"), book)
+                .where(order.longNumber("id").eq(2L))
+                .fetch();
+
+        System.out.println(books);
+    }
+
 
     @Override
     public void run() {
@@ -160,5 +208,8 @@ public class QJPAJoinDynamicExample implements Example {
         getAllRowsFromAnEntityBasedOnFKJoinWithCustomReferencedColumnName();
         getAllRowsFromAnEntityBasedOnJoinTableMappingUsingONClause();
         getAllRowsFromAnEntityBasedOnJoinTableMappingUsingFKJoin();
+        getAllRowsFromAnEntityBasedOnInverseFKJoin();
+        getAllRowsFromAnEntityBasedOnInverseFKJoinWithReferencedColumnName();
+
     }
 }
