@@ -11,8 +11,7 @@ import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.UploadedFile;
 import pl.exsio.querydsl.entityql.path.QUuidPath;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -60,11 +59,10 @@ public final class QUploadedFile extends QStaticModel<UploadedFile> {
 
     _primaryKey:
     {
-      List<Path> paths = new ArrayList();
+      this.primaryKeyColumns = Arrays.<Path<?>>asList(this.id);
 
-      paths.add(this.id);
-
-      this._primaryKey = this.<UploadedFile>createPrimaryKey(paths.<Path>toArray(new Path[0]));
+      this._primaryKey =
+          this.<UploadedFile>createPrimaryKey(primaryKeyColumns.<Path>toArray(new Path[0]));
     }
   }
 }

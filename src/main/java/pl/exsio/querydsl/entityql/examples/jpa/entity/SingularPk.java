@@ -1,10 +1,8 @@
 package pl.exsio.querydsl.entityql.examples.jpa.entity;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "SINGULAR_PK")
@@ -19,6 +17,9 @@ public class SingularPk {
 
     @Column(name = "DESC")
     private String desc;
+
+    @OneToMany(mappedBy = "singularPk")
+    private List<CompositeFk> compositeFks;
 
     public SingularPk() {
     }
