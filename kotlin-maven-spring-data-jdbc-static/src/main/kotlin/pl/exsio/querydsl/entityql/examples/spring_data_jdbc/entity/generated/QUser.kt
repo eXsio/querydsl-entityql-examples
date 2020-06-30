@@ -36,125 +36,114 @@ class QUser : QStaticModel<User<*>> {
     val qUser: QUser = QUser.instance
   }
 
-  lateinit var id: NumberPath<Long>
+  val id: NumberPath<Long> =
+      run {
+        val config = QPathConfig(Long::class.java, Long::class.java, "USER_ID", true, 1, 1111)
 
-  lateinit var name: StringPath
+        val id = QPathFactory.create<NumberPath<Long>>(this, config)
 
-  lateinit var typeStr: QEnumPath<UserTypeByName>
+        addMetadata(id, QColumnMetadataFactory.create(config))
+        this.columnsMap.put("id", id)
+        id
+      }
 
-  lateinit var typeOrd: QEnumPath<UserTypeByOrdinal>
+  val name: StringPath =
+      run {
+        val config = QPathConfig(String::class.java, String::class.java, "NAME", true, 2, 12)
 
-  lateinit var createdBy: QObjectPath<Any>
+        val name = QPathFactory.create<StringPath>(this, config)
 
-  lateinit var createdAt: QObjectPath<Date>
+        addMetadata(name, QColumnMetadataFactory.create(config))
+        this.columnsMap.put("name", name)
+        name
+      }
 
-  lateinit var enabled: BooleanPath
+  val typeStr: QEnumPath<UserTypeByName> =
+      run {
+        val config =
+            QPathConfig(UserTypeByName::class.java, Enum::class.java, "TYPE_STR", true, 4, 12)
 
-  lateinit var orderId: NumberPath<Long>
+        val typeStr = QPathFactory.create<QEnumPath<UserTypeByName>>(this, config)
 
-  lateinit var order: ForeignKey<Order>
+        addMetadata(typeStr, QColumnMetadataFactory.create(config))
+        this.columnsMap.put("typeStr", typeStr)
+        typeStr
+      }
 
-  lateinit var _primaryKey: PrimaryKey<User<*>>
+  val typeOrd: QEnumPath<UserTypeByOrdinal> =
+      run {
+        val config =
+            QPathConfig(UserTypeByOrdinal::class.java, Enum::class.java, "TYPE_ORD", true, 5, 12)
+
+        val typeOrd = QPathFactory.create<QEnumPath<UserTypeByOrdinal>>(this, config)
+
+        addMetadata(typeOrd, QColumnMetadataFactory.create(config))
+        this.columnsMap.put("typeOrd", typeOrd)
+        typeOrd
+      }
+
+  val createdBy: QObjectPath<Any> =
+      run {
+        val config =
+            QPathConfig(Object::class.java, Object::class.java, "CREATED_BY", true, 6, 1111)
+
+        val createdBy = QPathFactory.create<QObjectPath<Any>>(this, config)
+
+        addMetadata(createdBy, QColumnMetadataFactory.create(config))
+        this.columnsMap.put("createdBy", createdBy)
+        createdBy
+      }
+
+  val createdAt: QObjectPath<Date> =
+      run {
+        val config = QPathConfig(Date::class.java, Object::class.java, "CREATED_AT", true, 7, 1111)
+
+        val createdAt = QPathFactory.create<QObjectPath<Date>>(this, config)
+
+        addMetadata(createdAt, QColumnMetadataFactory.create(config))
+        this.columnsMap.put("createdAt", createdAt)
+        createdAt
+      }
+
+  val enabled: BooleanPath =
+      run {
+        val config = QPathConfig(Boolean::class.java, Boolean::class.java, "ENABLED", true, 8, 1111)
+
+        val enabled = QPathFactory.create<BooleanPath>(this, config)
+
+        addMetadata(enabled, QColumnMetadataFactory.create(config))
+        this.columnsMap.put("enabled", enabled)
+        enabled
+      }
+
+  val orderId: NumberPath<Long> =
+      run {
+        val config = QPathConfig(Long::class.java, Long::class.java, "ORDER_ID", true, 3, 1111)
+
+        val orderId = QPathFactory.create<NumberPath<Long>>(this, config)
+
+        addMetadata(orderId, QColumnMetadataFactory.create(config))
+        this.columnsMap.put("orderId", orderId)
+        orderId
+      }
+
+  val order: ForeignKey<Order> =
+      run {
+        val order = this.createForeignKey<Order>(this.orderId, "ORDER_ID")
+
+        this.joinColumnsMap.put("order", order)
+        order
+      }
+
+  val _primaryKey: PrimaryKey<User<*>> =
+      run {
+        val list = mutableListOf<Path<*>>(this.id)
+
+        this.primaryKeyColumns = list
+        this.createPrimaryKey(*list.toTypedArray())
+      }
 
   constructor() : this("USERS")
 
-  constructor(variable: String) : super(User::class.java, variable, "", "USERS") {
-
-    // id
-    run {
-      val config = QPathConfig(Long::class.java, Long::class.java, "USER_ID", true, 1, 1111)
-
-      this.id = QPathFactory.create<NumberPath<Long>>(this, config)
-
-      addMetadata(this.id, QColumnMetadataFactory.create(config))
-      this.columnsMap.put("id", this.id)
-    }
-
-    // name
-    run {
-      val config = QPathConfig(String::class.java, String::class.java, "NAME", true, 2, 12)
-
-      this.name = QPathFactory.create<StringPath>(this, config)
-
-      addMetadata(this.name, QColumnMetadataFactory.create(config))
-      this.columnsMap.put("name", this.name)
-    }
-
-    // typeStr
-    run {
-      val config =
-          QPathConfig(UserTypeByName::class.java, Enum::class.java, "TYPE_STR", true, 4, 12)
-
-      this.typeStr = QPathFactory.create<QEnumPath<UserTypeByName>>(this, config)
-
-      addMetadata(this.typeStr, QColumnMetadataFactory.create(config))
-      this.columnsMap.put("typeStr", this.typeStr)
-    }
-
-    // typeOrd
-    run {
-      val config =
-          QPathConfig(UserTypeByOrdinal::class.java, Enum::class.java, "TYPE_ORD", true, 5, 12)
-
-      this.typeOrd = QPathFactory.create<QEnumPath<UserTypeByOrdinal>>(this, config)
-
-      addMetadata(this.typeOrd, QColumnMetadataFactory.create(config))
-      this.columnsMap.put("typeOrd", this.typeOrd)
-    }
-
-    // createdBy
-    run {
-      val config = QPathConfig(Object::class.java, Object::class.java, "CREATED_BY", true, 6, 1111)
-
-      this.createdBy = QPathFactory.create<QObjectPath<Any>>(this, config)
-
-      addMetadata(this.createdBy, QColumnMetadataFactory.create(config))
-      this.columnsMap.put("createdBy", this.createdBy)
-    }
-
-    // createdAt
-    run {
-      val config = QPathConfig(Date::class.java, Object::class.java, "CREATED_AT", true, 7, 1111)
-
-      this.createdAt = QPathFactory.create<QObjectPath<Date>>(this, config)
-
-      addMetadata(this.createdAt, QColumnMetadataFactory.create(config))
-      this.columnsMap.put("createdAt", this.createdAt)
-    }
-
-    // enabled
-    run {
-      val config = QPathConfig(Boolean::class.java, Boolean::class.java, "ENABLED", true, 8, 1111)
-
-      this.enabled = QPathFactory.create<BooleanPath>(this, config)
-
-      addMetadata(this.enabled, QColumnMetadataFactory.create(config))
-      this.columnsMap.put("enabled", this.enabled)
-    }
-
-    // orderId
-    run {
-      val config = QPathConfig(Long::class.java, Long::class.java, "ORDER_ID", true, 3, 1111)
-
-      this.orderId = QPathFactory.create<NumberPath<Long>>(this, config)
-
-      addMetadata(this.orderId, QColumnMetadataFactory.create(config))
-      this.columnsMap.put("orderId", this.orderId)
-    }
-
-    // order
-    run {
-      this.order = this.createForeignKey<Order>(this.orderId, "ORDER_ID")
-
-      this.joinColumnsMap.put("order", this.order)
-    }
-
-    // _primaryKey
-    run {
-      val list = mutableListOf<Path<*>>(this.id)
-
-      this.primaryKeyColumns = list
-      this._primaryKey = this.createPrimaryKey(*list.toTypedArray())
-    }
-  }
+  constructor(variable: String) : super(User::class.java, variable, "", "USERS")
 }

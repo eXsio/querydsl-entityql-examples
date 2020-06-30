@@ -31,10 +31,10 @@
         <dependency>
             <groupId>com.github.eXsio</groupId>
             <artifactId>querydsl-entityql</artifactId>
-            <version>3.0-beta1</version>
+            <version>3.0.1</version>
         </dependency>
 
-        <!-- dependencies required by EntityQL -->
+        <!-- QueryDSL SQL -->
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-sql</artifactId>
@@ -71,7 +71,7 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
-        <!-- Dependencies needed to create and populate H2 database -->
+        <!-- H2 database -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -86,8 +86,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>11</source>
+                    <target>11</target>
                     <compilerArgument>-parameters</compilerArgument>
                 </configuration>
             </plugin>

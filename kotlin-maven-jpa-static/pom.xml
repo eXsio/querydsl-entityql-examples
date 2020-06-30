@@ -37,10 +37,10 @@
         <dependency>
             <groupId>com.github.eXsio</groupId>
             <artifactId>querydsl-entityql</artifactId>
-            <version>3.0-beta1</version>
+            <version>3.0.1</version>
         </dependency>
 
-        <!-- dependencies required by EntityQL -->
+        <!-- QueryDSL SQL -->
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-sql</artifactId>
@@ -73,7 +73,7 @@
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
-        <!-- Dependencies needed to create and populate H2 database and to provide JPA API -->
+        <!-- Optional dependencies to auto-create H2 database schema based on JPA Entities -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -83,12 +83,15 @@
             <artifactId>hibernate-core</artifactId>
             <version>5.4.10.Final</version>
         </dependency>
+
+        <!-- H2 Database -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.200</version>
         </dependency>
 
+        <!-- Kotlin -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
@@ -101,6 +104,83 @@
             <scope>runtime</scope>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <!-- This profile, if enabled, pre-compiles Kotlin sources and generates EntituQL Query Models -->
+        <profile>
+            <id>generate-static-models</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-plugin</artifactId>
+                        <version>1.3.72</version>
+                        <executions>
+                            <execution>
+                                <id>compile</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>compile</goal>
+                                </goals>
+                                <configuration>
+                                    <sourceDirs>
+                                        <source>src/main/kotlin</source>
+                                    </sourceDirs>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <jvmTarget>11</jvmTarget>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.github.eXsio</groupId>
+                        <artifactId>querydsl-entityql-maven-plugin</artifactId>
+                        <version>1.2.2</version>
+                        <executions>
+                            <execution>
+                                <id>compile</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>generate-models</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <!-- Use as many Generators as you need. You can mix and match different types as well. -->
+                            <generators>
+                                <generator>
+                                    <!-- Generator configuration for JPA based Entities -->
+                                    <type>JPA</type>
+                                    <sourcePackage>pl.exsio.querydsl.entityql.examples.jpa.entity</sourcePackage>
+                                    <destinationPackage>pl.exsio.querydsl.entityql.examples.jpa.entity.generated</destinationPackage>
+                                    <destinationPath>${project.basedir}\src\main\kotlin</destinationPath>
+                                    <filenamePattern>Q%s.kt</filenamePattern>
+                                </generator>
+                            </generators>
+                        </configuration>
+                        <dependencies>
+                            <!-- use EntityQL in the same version as in project -->
+                            <dependency>
+                                <groupId>com.github.eXsio</groupId>
+                                <artifactId>querydsl-entityql</artifactId>
+                                <version>3.0.1</version>
+                            </dependency>
+                            <!-- needed to properly detect Groovy classes -->
+                            <dependency>
+                                <groupId>org.jetbrains.kotlin</groupId>
+                                <artifactId>kotlin-stdlib-jdk8</artifactId>
+                                <version>1.3.72</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
@@ -135,39 +215,6 @@
                     <target>11</target>
                     <compilerArgument>-parameters</compilerArgument>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>com.github.eXsio</groupId>
-                <artifactId>querydsl-entityql-maven-plugin</artifactId>
-                <version>1.2.2</version>
-                <configuration>
-                    <!-- Use as many Generators as you need. You can mix and match different types as well. -->
-                    <generators>
-                        <generator>
-                            <!-- Generator configuration for JPA based Entities -->
-                            <type>JPA</type>
-                            <sourcePackage>pl.exsio.querydsl.entityql.examples.jpa.entity</sourcePackage>
-                            <destinationPackage>pl.exsio.querydsl.entityql.examples.jpa.entity.generated</destinationPackage>
-                            <destinationPath>${project.basedir}\src\main\kotlin</destinationPath>
-                            <filenamePattern>Q%s.kt</filenamePattern>
-                        </generator>
-                    </generators>
-                </configuration>
-                <dependencies>
-                    <!-- use EntityQL in the same version as in project -->
-                    <dependency>
-                        <groupId>com.github.eXsio</groupId>
-                        <artifactId>querydsl-entityql</artifactId>
-                        <version>3.0-beta1</version>
-                    </dependency>
-                    <!-- needed to properly detect Groovy classes -->
-                    <dependency>
-                        <groupId>org.jetbrains.kotlin</groupId>
-                        <artifactId>kotlin-stdlib-jdk8</artifactId>
-                        <version>1.3.72</version>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
     </build>

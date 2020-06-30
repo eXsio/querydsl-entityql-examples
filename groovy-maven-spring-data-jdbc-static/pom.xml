@@ -38,10 +38,10 @@
         <dependency>
             <groupId>com.github.eXsio</groupId>
             <artifactId>querydsl-entityql</artifactId>
-            <version>3.0-beta1</version>
+            <version>3.0.1</version>
         </dependency>
 
-        <!-- dependencies required by EntityQL -->
+        <!-- QueryDSL SQL -->
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-sql</artifactId>
@@ -77,12 +77,14 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
-        <!-- Dependencies needed to create and populate H2 database -->
+        <!-- H2 database -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.200</version>
         </dependency>
+
+        <!-- Groovy -->
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
@@ -90,6 +92,93 @@
             <type>pom</type>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <!-- This profie, if enabled, pre-compiles Groovy sources and generates EnityQL Query Models-->
+        <profile>
+            <id>generate-static-models</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.gmavenplus</groupId>
+                        <artifactId>gmavenplus-plugin</artifactId>
+                        <version>1.9.0</version>
+                        <executions>
+                            <execution>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>compile</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.codehaus.groovy</groupId>
+                                <artifactId>groovy-all</artifactId>
+                                <version>2.5.12</version>
+                                <type>pom</type>
+                                <scope>runtime</scope>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.github.eXsio</groupId>
+                        <artifactId>querydsl-entityql-maven-plugin</artifactId>
+                        <version>1.2.2</version>
+                        <executions>
+                            <execution>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>generate-models</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <!-- Use as many Generators as you need. You can mix and match different types as well. -->
+                            <generators>
+                                <!-- Generator configuration for Spring Data JDBC based Entities -->
+                                <generator>
+                                    <type>SPRING_DATA_JDBC</type>
+                                    <sourcePackage>pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity</sourcePackage>
+                                    <destinationPackage>pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.generated
+                                    </destinationPackage>
+                                    <!-- out of the box you can use one of the 2 provided naming strategies
+                                        - pl.exsio.querydsl.entityql.jdbc.UpperCaseWithUnderscoresNamingStrategy
+                                        - pl.exsio.querydsl.entityql.jdbc.DefaultNamingStrategy
+                                        If you want to use your own custom one, you will have to add a new <dependency/> that contains it
+                                    -->
+                                    <params>
+                                        <namingStrategy>pl.exsio.querydsl.entityql.jdbc.UpperCaseWithUnderscoresNamingStrategy
+                                        </namingStrategy>
+                                    </params>
+                                    <destinationPath>${project.basedir}\src\main\groovy</destinationPath>
+                                    <filenamePattern>Q%s.groovy</filenamePattern>
+                                </generator>
+                            </generators>
+                        </configuration>
+                        <dependencies>
+                            <!-- use EntityQL in the same version as in project -->
+                            <dependency>
+                                <groupId>com.github.eXsio</groupId>
+                                <artifactId>querydsl-entityql</artifactId>
+                                <version>3.0.1</version>
+                            </dependency>
+                            <!-- needed to detect Groovy classes -->
+                            <dependency>
+                                <groupId>org.codehaus.groovy</groupId>
+                                <artifactId>groovy-all</artifactId>
+                                <version>2.5.12</version>
+                                <type>pom</type>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
@@ -99,6 +188,7 @@
                 <version>1.9.0</version>
                 <executions>
                     <execution>
+                        <phase>compile</phase>
                         <goals>
                             <goal>compile</goal>
                         </goals>
@@ -123,50 +213,6 @@
                     <target>11</target>
                     <compilerArgument>-parameters</compilerArgument>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>com.github.eXsio</groupId>
-                <artifactId>querydsl-entityql-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <configuration>
-                    <!-- Use as many Generators as you need. You can mix and match different types as well. -->
-                    <generators>
-                        <!-- Generator configuration for Spring Data JDBC based Entities -->
-                        <generator>
-                            <type>SPRING_DATA_JDBC</type>
-                            <sourcePackage>pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity</sourcePackage>
-                            <destinationPackage>pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.generated
-                            </destinationPackage>
-                            <!-- out of the box you can use one of the 2 provided naming strategies
-                                - pl.exsio.querydsl.entityql.jdbc.UpperCaseWithUnderscoresNamingStrategy
-                                - pl.exsio.querydsl.entityql.jdbc.DefaultNamingStrategy
-                                If you want to use your own custom one, you will have to add a new <dependency/> that contains it
-                            -->
-                            <params>
-                                <namingStrategy>pl.exsio.querydsl.entityql.jdbc.UpperCaseWithUnderscoresNamingStrategy
-                                </namingStrategy>
-                            </params>
-                            <destinationPath>${project.basedir}\src\main\groovy</destinationPath>
-                            <filenamePattern>Q%s.groovy</filenamePattern>
-                        </generator>
-                    </generators>
-                </configuration>
-                <dependencies>
-                    <!-- use EntityQL in the same version as in project -->
-                    <dependency>
-                        <groupId>com.github.eXsio</groupId>
-                        <artifactId>querydsl-entityql</artifactId>
-                        <version>3.0-beta1</version>
-                    </dependency>
-                    <!-- needed to detect Groovy classes -->
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-all</artifactId>
-                        <version>2.5.12</version>
-                        <type>pom</type>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
     </build>
