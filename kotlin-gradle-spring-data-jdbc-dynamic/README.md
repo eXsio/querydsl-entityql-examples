@@ -9,7 +9,7 @@ Feel free to clone it and play around with the examples to see just how convenie
 
 ## Points of Interest:
 
-- [Build Configuration](https://github.com/eXsio/querydsl-entityql-examples/blob/master/kotlin-gradle-spring-data-jdbc-dynamic/pom.xml)
+- [Build Configuration](https://github.com/eXsio/querydsl-entityql-examples/blob/master/kotlin-gradle-spring-data-jdbc-dynamic/build.gradle)
 - [Spring Configuration](https://github.com/eXsio/querydsl-entityql-examples/blob/master/kotlin-gradle-spring-data-jdbc-dynamic/src/main/kotlin/pl/exsio/querydsl/entityql/examples/configuration/EntityQlConfiguration.kt)
 - [Entities](https://github.com/eXsio/querydsl-entityql-examples/tree/master/kotlin-gradle-spring-data-jdbc-dynamic/src/main/kotlin/pl/exsio/querydsl/entityql/examples/spring_data_jdbc/entity)
 - [Simple Selects Examples](https://github.com/eXsio/querydsl-entityql-examples/blob/master/kotlin-gradle-spring-data-jdbc-dynamic/src/main/kotlin/pl/exsio/querydsl/entityql/examples/spring_data_jdbc/example/dynamic/KQSpringDataJDBCSimpleSelectDynamicExample.kt)
