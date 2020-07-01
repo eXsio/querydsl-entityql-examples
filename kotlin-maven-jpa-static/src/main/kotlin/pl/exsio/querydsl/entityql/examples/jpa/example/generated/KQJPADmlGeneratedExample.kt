@@ -18,7 +18,7 @@ import java.util.*
 import javax.transaction.Transactional
 
 @Service
-open class KQJPADmlGeneratedExample(@Autowired var queryFactory: SQLQueryFactory) : Example {
+open class KQJPADmlGeneratedExample(@Autowired val queryFactory: SQLQueryFactory) : Example {
 
     
     fun insertNewEntity() {

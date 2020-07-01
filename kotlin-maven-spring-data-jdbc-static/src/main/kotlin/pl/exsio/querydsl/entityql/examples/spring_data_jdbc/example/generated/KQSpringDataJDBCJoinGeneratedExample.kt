@@ -10,7 +10,7 @@ import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.*
 import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.generated.*
 
 @Service
-class KQSpringDataJDBCJoinGeneratedExample(@Autowired var queryFactory: SQLQueryFactory) : Example {
+class KQSpringDataJDBCJoinGeneratedExample(@Autowired val queryFactory: SQLQueryFactory) : Example {
     
     fun getAllRowsFromAnEntityBasedOnAColumnONJoin() {
 

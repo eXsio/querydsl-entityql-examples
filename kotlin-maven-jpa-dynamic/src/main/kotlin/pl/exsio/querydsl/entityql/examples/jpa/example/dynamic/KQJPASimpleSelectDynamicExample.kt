@@ -13,7 +13,7 @@ import pl.exsio.querydsl.entityql.examples.jpa.entity.User
 import java.util.*
 
 @Service
-class KQJPASimpleSelectDynamicExample(@Autowired var queryFactory: SQLQueryFactory) : Example {
+class KQJPASimpleSelectDynamicExample(@Autowired val queryFactory: SQLQueryFactory) : Example {
 
 
     fun getAllRowsFromAnEntity() {

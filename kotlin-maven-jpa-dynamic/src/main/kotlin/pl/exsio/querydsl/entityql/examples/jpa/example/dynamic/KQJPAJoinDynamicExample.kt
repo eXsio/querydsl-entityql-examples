@@ -10,7 +10,7 @@ import pl.exsio.querydsl.entityql.examples.Example
 import pl.exsio.querydsl.entityql.examples.jpa.entity.*
 
 @Service
-class KQJPAJoinDynamicExample(@Autowired var queryFactory: SQLQueryFactory) : Example {
+class KQJPAJoinDynamicExample(@Autowired val queryFactory: SQLQueryFactory) : Example {
     
     fun getAllRowsFromAnEntityBasedOnAColumnONJoin() {
 

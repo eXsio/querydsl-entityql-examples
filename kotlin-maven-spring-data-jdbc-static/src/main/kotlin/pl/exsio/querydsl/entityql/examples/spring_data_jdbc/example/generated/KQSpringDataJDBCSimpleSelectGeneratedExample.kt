@@ -12,7 +12,7 @@ import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.generated.QBo
 import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.generated.QUser
 
 @Service
-class KQSpringDataJDBCSimpleSelectGeneratedExample(@Autowired var queryFactory: SQLQueryFactory) : Example {
+class KQSpringDataJDBCSimpleSelectGeneratedExample(@Autowired val queryFactory: SQLQueryFactory) : Example {
 
 
     fun getAllRowsFromAnEntity() {

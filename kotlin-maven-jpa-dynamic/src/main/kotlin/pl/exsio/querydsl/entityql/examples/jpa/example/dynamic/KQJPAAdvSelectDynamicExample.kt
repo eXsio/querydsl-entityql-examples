@@ -19,7 +19,7 @@ import java.math.BigDecimal
 
 
 @Service
-class KQJPAAdvSelectDynamicExample(@Autowired var queryFactory: SQLQueryFactory) : Example {
+class KQJPAAdvSelectDynamicExample(@Autowired val queryFactory: SQLQueryFactory) : Example {
 
     
     fun useAggregateFunctions() {

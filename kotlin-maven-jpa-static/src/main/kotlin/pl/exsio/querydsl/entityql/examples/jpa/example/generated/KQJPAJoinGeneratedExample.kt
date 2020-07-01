@@ -11,7 +11,7 @@ import pl.exsio.querydsl.entityql.examples.jpa.entity.*
 import pl.exsio.querydsl.entityql.examples.jpa.entity.generated.*
 
 @Service
-class KQJPAJoinGeneratedExample(@Autowired var queryFactory: SQLQueryFactory) : Example {
+class KQJPAJoinGeneratedExample(@Autowired val queryFactory: SQLQueryFactory) : Example {
     
     fun getAllRowsFromAnEntityBasedOnAColumnONJoin() {
 

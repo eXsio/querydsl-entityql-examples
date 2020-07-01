@@ -18,9 +18,9 @@ import java.math.BigDecimal
 import java.util.*
 
 @Service
-open class KQSpringDataJDBCDmlDynamicExample(@Autowired var queryFactory: SQLQueryFactory) : Example {
+open class KQSpringDataJDBCDmlDynamicExample(@Autowired val queryFactory: SQLQueryFactory) : Example {
 
-    var scanner = SpringDataJdbcQEntityScanner(UpperCaseWithUnderscoresNamingStrategy())
+    val scanner = SpringDataJdbcQEntityScanner(UpperCaseWithUnderscoresNamingStrategy())
     
     fun insertNewEntity() {
 

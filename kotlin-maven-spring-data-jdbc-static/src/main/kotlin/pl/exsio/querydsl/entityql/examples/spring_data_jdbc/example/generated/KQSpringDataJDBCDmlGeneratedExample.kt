@@ -16,7 +16,7 @@ import java.math.BigDecimal
 import java.util.*
 
 @Service
-open class KQSpringDataJDBCDmlGeneratedExample(@Autowired var queryFactory: SQLQueryFactory) : Example {
+open class KQSpringDataJDBCDmlGeneratedExample(@Autowired val queryFactory: SQLQueryFactory) : Example {
 
 
     fun insertNewEntity() {

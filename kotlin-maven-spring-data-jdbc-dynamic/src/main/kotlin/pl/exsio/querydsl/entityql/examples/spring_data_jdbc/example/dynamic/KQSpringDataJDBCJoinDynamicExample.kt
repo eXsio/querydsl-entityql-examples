@@ -12,9 +12,9 @@ import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.*
 import pl.exsio.querydsl.entityql.kotlin.spring_data_jdbc.entity.UpperCaseWithUnderscoresNamingStrategy
 
 @Service
-class KQSpringDataJDBCJoinDynamicExample(@Autowired var queryFactory: SQLQueryFactory) : Example {
+class KQSpringDataJDBCJoinDynamicExample(@Autowired val queryFactory: SQLQueryFactory) : Example {
 
-    var scanner = SpringDataJdbcQEntityScanner(UpperCaseWithUnderscoresNamingStrategy())
+    val scanner = SpringDataJdbcQEntityScanner(UpperCaseWithUnderscoresNamingStrategy())
     
     fun getAllRowsFromAnEntityBasedOnAColumnONJoin() {
 

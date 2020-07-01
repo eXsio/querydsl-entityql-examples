@@ -21,9 +21,9 @@ import java.math.BigDecimal
 
 
 @Service
-class KQSpringDataJDBCAdvSelectDynamicExample(@Autowired var queryFactory: SQLQueryFactory) : Example {
+class KQSpringDataJDBCAdvSelectDynamicExample(@Autowired val queryFactory: SQLQueryFactory) : Example {
 
-    var scanner = SpringDataJdbcQEntityScanner(UpperCaseWithUnderscoresNamingStrategy())
+    val scanner = SpringDataJdbcQEntityScanner(UpperCaseWithUnderscoresNamingStrategy())
     
     fun useAggregateFunctions() {
 

@@ -18,7 +18,7 @@ import java.math.BigDecimal
 
 
 @Service
-class KQSpringDataJDBCAdvSelectGeneratedExample(@Autowired var queryFactory: SQLQueryFactory) : Example {
+class KQSpringDataJDBCAdvSelectGeneratedExample(@Autowired val queryFactory: SQLQueryFactory) : Example {
 
     
     fun useAggregateFunctions() {

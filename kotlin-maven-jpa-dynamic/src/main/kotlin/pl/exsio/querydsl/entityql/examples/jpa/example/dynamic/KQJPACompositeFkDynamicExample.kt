@@ -11,7 +11,7 @@ import pl.exsio.querydsl.entityql.examples.jpa.entity.CompositePk
 import pl.exsio.querydsl.entityql.examples.jpa.entity.SingularPk
 
 @Service
-class KQJPACompositeFkDynamicExample(@Autowired var queryFactory: SQLQueryFactory) : Example {
+class KQJPACompositeFkDynamicExample(@Autowired val queryFactory: SQLQueryFactory) : Example {
     
     fun getAllRowsFromAnEntityBasedOnACompositeFKJoinToCompositePK() {
 

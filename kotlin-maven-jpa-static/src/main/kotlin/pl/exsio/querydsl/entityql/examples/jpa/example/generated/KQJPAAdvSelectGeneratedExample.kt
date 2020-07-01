@@ -23,7 +23,7 @@ import java.math.BigDecimal
 
 
 @Service
-class KQJPAAdvSelectGeneratedExample(@Autowired var queryFactory: SQLQueryFactory) : Example {
+class KQJPAAdvSelectGeneratedExample(@Autowired val queryFactory: SQLQueryFactory) : Example {
 
     
     fun useAggregateFunctions() {
