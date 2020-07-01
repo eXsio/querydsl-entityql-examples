@@ -13,12 +13,12 @@ import pl.exsio.querydsl.entityql.examples.spring_data_jdbc.entity.generated.*
 class KQSpringDataJDBCJoinGeneratedExample(@Autowired var queryFactory: SQLQueryFactory) : Example {
     
     fun getAllRowsFromAnEntityBasedOnAColumnONJoin() {
-        //given:
+
         val book = QBook.instance
         val order = QOrder.instance
         val orderItem = QOrderItem.instance
 
-        //when:
+
         val books = queryFactory.query()
                 .select(
                         constructor(
@@ -34,18 +34,18 @@ class KQSpringDataJDBCJoinGeneratedExample(@Autowired var queryFactory: SQLQuery
                 .where(order.id.eq(1L))
                 .fetch()
 
-        //then:
+
         println(books)
     }
 
     
     fun getAllRowsUsingListOfColumnNames() {
-        //given:
+
         val book = QBook.instance
         val order = QOrder.instance
         val orderItem = QOrderItem.instance
 
-        //when:
+
         val books = queryFactory.query()
                 .select(
                         dto(Book::class.java, listOf(book.id, book.name, book.desc, book.price))
@@ -56,18 +56,18 @@ class KQSpringDataJDBCJoinGeneratedExample(@Autowired var queryFactory: SQLQuery
                 .where(order.id.eq(1L))
                 .fetch()
 
-        //then:
+
         println(books)
     }
 
     
     fun getAllRowsFromAnEntityBasedOnFKJoin() {
-        //given:
+
         val book = QBook.instance
         val order = QOrder.instance
         val orderItem = QOrderItem.instance
 
-        //when:
+
         val books = queryFactory.query()
                 .select(
                         constructor(
@@ -83,7 +83,7 @@ class KQSpringDataJDBCJoinGeneratedExample(@Autowired var queryFactory: SQLQuery
                 .where(order.id.eq(2L))
                 .fetch()
 
-        //then:
+
         println(books)
     }
 

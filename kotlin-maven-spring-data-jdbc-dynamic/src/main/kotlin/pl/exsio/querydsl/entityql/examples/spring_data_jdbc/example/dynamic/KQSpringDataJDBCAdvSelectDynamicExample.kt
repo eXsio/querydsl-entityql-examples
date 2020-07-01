@@ -26,10 +26,10 @@ class KQSpringDataJDBCAdvSelectDynamicExample(@Autowired var queryFactory: SQLQu
     var scanner = SpringDataJdbcQEntityScanner(UpperCaseWithUnderscoresNamingStrategy())
     
     fun useAggregateFunctions() {
-        //given:
+
         val orderItem = qEntity(OrderItem::class.java, scanner)
 
-        //when:
+
 
         val result = queryFactory
                 .select(
@@ -42,18 +42,18 @@ class KQSpringDataJDBCAdvSelectDynamicExample(@Autowired var queryFactory: SQLQu
                 .orderBy(orderItem.longNumber("orderId").asc())
                 .fetch();
 
-        //then:
+
         println(result)
     }
     
     fun useSubQueries() {
-        //given:
+
         val user = qEntity(User::class.java, scanner)
         val book = qEntity(Book::class.java, scanner)
         val order = qEntity(Order::class.java, scanner)
         val orderItem = qEntity(OrderItem::class.java, scanner)
 
-        //when:
+
         val result = queryFactory
                 .select(user.string("name"))
                 .from(user)
@@ -65,7 +65,7 @@ class KQSpringDataJDBCAdvSelectDynamicExample(@Autowired var queryFactory: SQLQu
                                 .where(book.decimalNumber("price").gt(BigDecimal("80")))
                 )).fetch()
 
-        //then:
+
         println(result)
 
     }
@@ -76,7 +76,7 @@ class KQSpringDataJDBCAdvSelectDynamicExample(@Autowired var queryFactory: SQLQu
         val order = qEntity(Order::class.java, scanner)
         val orderItem = qEntity(OrderItem::class.java, scanner)
 
-        //when:
+
         val result = queryFactory
                 .select(count(Wildcard.all))
                 .from(
@@ -87,7 +87,7 @@ class KQSpringDataJDBCAdvSelectDynamicExample(@Autowired var queryFactory: SQLQu
                                 .where(book.decimalNumber("price").gt(BigDecimal("80")))
                 ).fetchOne()
 
-        //then:
+
         println(result)
     }
 

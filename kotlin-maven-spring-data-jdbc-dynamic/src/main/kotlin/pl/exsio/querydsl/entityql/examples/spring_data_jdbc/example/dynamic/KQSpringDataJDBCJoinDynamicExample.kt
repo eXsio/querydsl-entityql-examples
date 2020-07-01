@@ -17,12 +17,12 @@ class KQSpringDataJDBCJoinDynamicExample(@Autowired var queryFactory: SQLQueryFa
     var scanner = SpringDataJdbcQEntityScanner(UpperCaseWithUnderscoresNamingStrategy())
     
     fun getAllRowsFromAnEntityBasedOnAColumnONJoin() {
-        //given:
+
         val book = qEntity(Book::class.java, scanner)
         val order = qEntity(Order::class.java, scanner)
         val orderItem = qEntity(OrderItem::class.java, scanner)
 
-        //when:
+
         val books = queryFactory.query()
                 .select(
                         constructor(
@@ -38,18 +38,18 @@ class KQSpringDataJDBCJoinDynamicExample(@Autowired var queryFactory: SQLQueryFa
                 .where(order.longNumber("id").eq(1L))
                 .fetch()
 
-        //then:
+
         println(books)
     }
 
     
     fun getAllRowsUsingListOfColumnNames() {
-        //given:
+
         val book = qEntity(Book::class.java, scanner)
         val order = qEntity(Order::class.java, scanner)
         val orderItem = qEntity(OrderItem::class.java, scanner)
 
-        //when:
+
         val books = queryFactory.query()
                 .select(
                         dto(Book::class.java, book.columns("id", "name", "desc", "price"))
@@ -60,18 +60,18 @@ class KQSpringDataJDBCJoinDynamicExample(@Autowired var queryFactory: SQLQueryFa
                 .where(order.longNumber("id").eq(1L))
                 .fetch()
 
-        //then:
+
         println(books)
     }
 
     
     fun getAllRowsFromAnEntityBasedOnFKJoin() {
-        //given:
+
         val book = qEntity(Book::class.java, scanner)
         val order = qEntity(Order::class.java, scanner)
         val orderItem = qEntity(OrderItem::class.java, scanner)
 
-        //when:
+
         val books = queryFactory.query()
                 .select(
                         constructor(
@@ -87,7 +87,7 @@ class KQSpringDataJDBCJoinDynamicExample(@Autowired var queryFactory: SQLQueryFa
                 .where(order.longNumber("id").eq(2L))
                 .fetch()
 
-        //then:
+
         println(books)
     }
 

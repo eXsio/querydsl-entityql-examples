@@ -27,10 +27,10 @@ class KQJPAAdvSelectGeneratedExample(@Autowired var queryFactory: SQLQueryFactor
 
     
     fun useAggregateFunctions() {
-        //given:
+
         val orderItem = QOrderItem.instance
 
-        //when:
+
 
         val result = queryFactory
                 .select(
@@ -43,18 +43,18 @@ class KQJPAAdvSelectGeneratedExample(@Autowired var queryFactory: SQLQueryFactor
                 .orderBy(orderItem.orderId.asc())
                 .fetch();
 
-        //then:
+
         println(result)
     }
     
     fun useSubQueries() {
-        //given:
+
         val user = QUser.instance
         val book = QBook.instance
         val order = QOrder.instance
         val orderItem = QOrderItem.instance
 
-        //when:
+
         val result = queryFactory
                 .select(user.name)
                 .from(user)
@@ -66,7 +66,7 @@ class KQJPAAdvSelectGeneratedExample(@Autowired var queryFactory: SQLQueryFactor
                                 .where(book.price.gt(BigDecimal("80")))
                 )).fetch()
 
-        //then:
+
         println(result)
 
     }
@@ -77,7 +77,7 @@ class KQJPAAdvSelectGeneratedExample(@Autowired var queryFactory: SQLQueryFactor
         val order = QOrder.instance
         val orderItem = QOrderItem.instance
 
-        //when:
+
         val result = queryFactory
                 .select(count(Wildcard.all))
                 .from(
@@ -88,7 +88,7 @@ class KQJPAAdvSelectGeneratedExample(@Autowired var queryFactory: SQLQueryFactor
                                 .where(book.price.gt(BigDecimal("80")))
                 ).fetchOne()
 
-        //then:
+
         println(result)
     }
 

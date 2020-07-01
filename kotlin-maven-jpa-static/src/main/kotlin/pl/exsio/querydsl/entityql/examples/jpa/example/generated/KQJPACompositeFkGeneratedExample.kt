@@ -17,11 +17,11 @@ import pl.exsio.querydsl.entityql.examples.jpa.entity.generated.QSingularPk
 class KQJPACompositeFkGeneratedExample(@Autowired var queryFactory: SQLQueryFactory) : Example {
     
     fun getAllRowsFromAnEntityBasedOnACompositeFKJoinToCompositePK() {
-        //given:
+
         val compositePk = QCompositePk.instance
         val compositeFk = QCompositeFk.instance
 
-        //when:
+
         val pks = queryFactory.query()
                 .select(
                         constructor(
@@ -35,17 +35,17 @@ class KQJPACompositeFkGeneratedExample(@Autowired var queryFactory: SQLQueryFact
                 .where(compositeFk.desc.eq("fkd2"))
                 .fetch()
 
-        //then:
+
         println(pks)
     }
 
     
     fun getAllRowsFromAnEntityBasedOnACompositeFKJoinToSingularPK() {
-        //given:
+
         val singularPk = QSingularPk.instance
         val compositeFk = QCompositeFk.instance
 
-        //when:
+
         val pks = queryFactory.query()
                 .select(
                         constructor(
@@ -59,16 +59,16 @@ class KQJPACompositeFkGeneratedExample(@Autowired var queryFactory: SQLQueryFact
                 .where(compositeFk.desc.eq("fkd2"))
                 .fetch()
 
-        //then:
+
         println(pks)
     }
 
     fun getAllRowsGromAnEntityBasedOnAnInverseCompositeFKJoinToCompositePK() {
-        //given:
+
         val compositePk = QCompositePk.instance
         val compositeFk = QCompositeFk.instance
 
-        //when:
+
         val pks = queryFactory.query()
                 .select(
                         constructor(
@@ -82,17 +82,17 @@ class KQJPACompositeFkGeneratedExample(@Autowired var queryFactory: SQLQueryFact
                 .where(compositeFk.desc.eq("fkd2"))
                 .fetch()
 
-        //then:
+
         println(pks)
     }
 
     
     fun getAllRowsFromAnEntityBasedOnAnInverseCompositeFKJoinToSingularPK() {
-        //given:
+
         val singularPk = QSingularPk.instance
         val compositeFk = QCompositeFk.instance
 
-        //when:
+
         val pks = queryFactory.query()
                 .select(
                         constructor(
@@ -106,7 +106,7 @@ class KQJPACompositeFkGeneratedExample(@Autowired var queryFactory: SQLQueryFact
                 .where(compositeFk.desc.eq("fkd2"))
                 .fetch()
 
-        //then:
+
         println(pks)
     }
 

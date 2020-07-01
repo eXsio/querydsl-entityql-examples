@@ -30,7 +30,7 @@ class KQJPASimpleSelectDynamicExample(@Autowired var queryFactory: SQLQueryFacto
                         ))
                 .from(book).fetch()
 
-        //then:
+
         println(books)
     }
 
@@ -39,7 +39,7 @@ class KQJPASimpleSelectDynamicExample(@Autowired var queryFactory: SQLQueryFacto
         // given:
         val book = qEntity(Book::class.java)
 
-        //when:
+
         val p = queryFactory.query()
                 .select(
                         constructor(
@@ -52,7 +52,7 @@ class KQJPASimpleSelectDynamicExample(@Autowired var queryFactory: SQLQueryFacto
                 .where(book.longNumber("id").eq(1L))
                 .from(book).fetchOne()
 
-        //then:
+
         println(p)
     }
 
@@ -61,13 +61,13 @@ class KQJPASimpleSelectDynamicExample(@Autowired var queryFactory: SQLQueryFacto
         // given:
         val user = qEntity(User::class.java)
 
-        //when:
+
         val userName = queryFactory.query()
                 .select(user.string("name"))
                 .where(user.enumerated<UserTypeByName>("typeStr").eq(UserTypeByName.ADMIN))
                 .from(user).fetchOne()
 
-        //then:
+
         println(userName)
     }
 
@@ -76,13 +76,13 @@ class KQJPASimpleSelectDynamicExample(@Autowired var queryFactory: SQLQueryFacto
         // given:
         val user = qEntity(User::class.java)
 
-        //when:
+
         val userName = queryFactory.query()
                 .select(user.string("name"))
                 .where(user.enumerated<UserTypeByOrdinal>("typeOrd").eq(UserTypeByOrdinal.ADMIN))
                 .from(user).fetchOne()
 
-        //then:
+
         println(userName)
     }
 
@@ -91,13 +91,13 @@ class KQJPASimpleSelectDynamicExample(@Autowired var queryFactory: SQLQueryFacto
         // given:
         val user = qEntity(User::class.java)
 
-        //when:
+
         val createdBy = queryFactory.query()
                 .select(user.column<String>("createdBy"))
                 .where(user.enumerated<UserTypeByName>("typeStr").eq(UserTypeByName.ADMIN))
                 .from(user).fetchOne()
 
-        //then:
+
         println(createdBy)
     }
 
@@ -106,43 +106,43 @@ class KQJPASimpleSelectDynamicExample(@Autowired var queryFactory: SQLQueryFacto
         // given:
         val user = qEntity(User::class.java)
 
-        //when:
+
         val createdBy = queryFactory.query()
                 .select(user.column<Date>("createdAt"))
                 .where(user.enumerated<UserTypeByName>("typeStr").eq(UserTypeByName.ADMIN))
                 .from(user).fetchOne()
 
-        //then:
+
         println(createdBy)
     }
 
 
     fun getEnumFields() {
-        //given:
+
         val user = qEntity(User::class.java)
 
-        //when:
+
         val type = queryFactory.query()
                 .select(user.enumerated<UserTypeByName>("typeStr"))
                 .where(user.enumerated<UserTypeByName>("typeStr").eq(UserTypeByName.ADMIN))
                 .from(user).fetchOne()
 
-        //then:
+
         println(type)
     }
 
 
     fun getBooleanFields() {
-        //given:
+
         val user = qEntity(User::class.java)
 
-        //when:
+
         val enabled : Boolean? = queryFactory.query()
                 .select(user.bool("enabled"))
                 .where(user.enumerated<UserTypeByName>("typeStr").eq(UserTypeByName.ADMIN))
                 .from(user).fetchOne()
 
-        //then:
+
 
         println(enabled)
     }

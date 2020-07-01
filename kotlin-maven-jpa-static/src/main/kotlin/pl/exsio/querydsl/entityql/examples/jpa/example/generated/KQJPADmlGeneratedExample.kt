@@ -22,26 +22,26 @@ open class KQJPADmlGeneratedExample(@Autowired var queryFactory: SQLQueryFactory
 
     
     fun insertNewEntity() {
-        //given:
+
         val book = QBook.instance
 
-        //when:
+
         queryFactory.insert(book)
                 .set(book.id, 10L)
                 .set(book.name, "newBook")
                 .set(book.price, BigDecimal.ONE)
                 .execute();
 
-        //then:
+
         println(queryFactory.query().select(count()).from(book).fetchOne())
     }
 
     
     fun insertNewEntityUsingSetMethod() {
-        //given:
+
         val book = QBook.instance
 
-        //when:
+
         book.set(
                 queryFactory.insert(book),
                 book.id, 11L,
@@ -50,23 +50,23 @@ open class KQJPADmlGeneratedExample(@Autowired var queryFactory: SQLQueryFactory
                 .execute()
 
 
-        //then:
+
         println(queryFactory.query().select(count()).from(book).fetchOne())
     }
 
     
     fun updateExistingEntity() {
-        //given:
+
         val book = QBook.instance
 
-        //when:
+
         queryFactory.update(book)
                 .set(book.name, "updatedBook")
                 .set(book.price, BigDecimal.ONE)
                 .where(book.id.eq(9L))
                 .execute();
 
-        //then:
+
         println(queryFactory.query().select(count()).from(book)
                 .where(book.name.eq("updatedBook")
                         .and(book.price.eq(BigDecimal.ONE))
@@ -76,10 +76,10 @@ open class KQJPADmlGeneratedExample(@Autowired var queryFactory: SQLQueryFactory
 
     
     fun updateExistingEntityUsingSetMethod() {
-        //given:
+
         val book = QBook.instance
 
-        //when:
+
         val update = queryFactory.update(book)
                 .where(book.longNumber("id").eq(9L))
 
@@ -88,7 +88,7 @@ open class KQJPADmlGeneratedExample(@Autowired var queryFactory: SQLQueryFactory
                 book.price, BigDecimal.ONE
         ).execute()
 
-        //then:
+
         println(queryFactory.query().select(count()).from(book)
                 .where(book.name.eq("updatedBook")
                         .and(book.price.eq(BigDecimal.ONE))
@@ -98,27 +98,27 @@ open class KQJPADmlGeneratedExample(@Autowired var queryFactory: SQLQueryFactory
 
     
     fun deleteExistingEntity() {
-        //given:
+
         val book = QBook.instance
 
-        //when:
+
         queryFactory.delete(book)
                 .where(book.id.eq(4L))
                 .execute();
 
-        //then:
+
         println(queryFactory.query().select(count()).from(book).fetchOne())
     }
 
     
     fun insertAndReadByteArray() {
-        //given:
+
         val file = QUploadedFile.instance
 
         val id = UUID.randomUUID()
         val data = "someData".toByteArray()
 
-        //when:
+
         queryFactory.insert(file)
                 .set(file.id, id)
                 .set(file.data, data)
@@ -134,7 +134,7 @@ open class KQJPADmlGeneratedExample(@Autowired var queryFactory: SQLQueryFactory
                 .where(file.id.eq(id))
                 .fetchOne()
 
-        //then:
+
        println(uploadedFile)
     }
 

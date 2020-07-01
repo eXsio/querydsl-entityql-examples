@@ -23,26 +23,26 @@ open class KQSpringDataJDBCDmlDynamicExample(@Autowired var queryFactory: SQLQue
     var scanner = SpringDataJdbcQEntityScanner(UpperCaseWithUnderscoresNamingStrategy())
     
     fun insertNewEntity() {
-        //given:
+
         val book = qEntity(Book::class.java, scanner)
 
-        //when:
+
         queryFactory.insert(book)
                 .set(book.longNumber("id"), 10L)
                 .set(book.string("name"), "newBook")
                 .set(book.decimalNumber("price"), BigDecimal.ONE)
                 .execute();
 
-        //then:
+
         println(queryFactory.query().select(count()).from(book).fetchOne())
     }
 
     
     fun insertNewEntityUsingSetMethod() {
-        //given:
+
         val book = qEntity(Book::class.java, scanner)
 
-        //when:
+
         book.set(
                 queryFactory.insert(book),
                 "id", 11L,
@@ -51,23 +51,23 @@ open class KQSpringDataJDBCDmlDynamicExample(@Autowired var queryFactory: SQLQue
                 .execute()
 
 
-        //then:
+
         println(queryFactory.query().select(count()).from(book).fetchOne())
     }
 
     
     fun updateExistingEntity() {
-        //given:
+
         val book = qEntity(Book::class.java, scanner)
 
-        //when:
+
         queryFactory.update(book)
                 .set(book.string("name"), "updatedBook")
                 .set(book.decimalNumber("price"), BigDecimal.ONE)
                 .where(book.longNumber("id").eq(9L))
                 .execute();
 
-        //then:
+
         println(queryFactory.query().select(count()).from(book)
                 .where(book.string("name").eq("updatedBook")
                         .and(book.decimalNumber("price").eq(BigDecimal.ONE))
@@ -77,10 +77,10 @@ open class KQSpringDataJDBCDmlDynamicExample(@Autowired var queryFactory: SQLQue
 
     
     fun updateExistingEntityUsingSetMethod() {
-        //given:
+
         val book = qEntity(Book::class.java, scanner)
 
-        //when:
+
         val update = queryFactory.update(book)
                 .where(book.longNumber("id").eq(9L))
 
@@ -89,7 +89,7 @@ open class KQSpringDataJDBCDmlDynamicExample(@Autowired var queryFactory: SQLQue
                 "price", BigDecimal.ONE
         ).execute()
 
-        //then:
+
         println(queryFactory.query().select(count()).from(book)
                 .where(book.string("name").eq("updatedBook")
                         .and(book.decimalNumber("price").eq(BigDecimal.ONE))
@@ -99,27 +99,27 @@ open class KQSpringDataJDBCDmlDynamicExample(@Autowired var queryFactory: SQLQue
 
     
     fun deleteExistingEntity() {
-        //given:
+
         val book = qEntity(Book::class.java, scanner)
 
-        //when:
+
         queryFactory.delete(book)
                 .where(book.longNumber("id").eq(4L))
                 .execute();
 
-        //then:
+
         println(queryFactory.query().select(count()).from(book).fetchOne())
     }
 
     
     fun insertAndReadByteArray() {
-        //given:
+
         val file = qEntity(UploadedFile::class.java, scanner)
 
         val id = UUID.randomUUID()
         val data = "someData".toByteArray()
 
-        //when:
+
         queryFactory.insert(file)
                 .set(file.uuid("id"), id)
                 .set(file.array<ByteArray, Byte>("data"), data)
@@ -135,7 +135,7 @@ open class KQSpringDataJDBCDmlDynamicExample(@Autowired var queryFactory: SQLQue
                 .where(file.uuid("id").eq(id))
                 .fetchOne()
 
-        //then:
+
        println(uploadedFile)
     }
 

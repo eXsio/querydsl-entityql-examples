@@ -14,11 +14,11 @@ import pl.exsio.querydsl.entityql.examples.jpa.entity.SingularPk
 class KQJPACompositeFkDynamicExample(@Autowired var queryFactory: SQLQueryFactory) : Example {
     
     fun getAllRowsFromAnEntityBasedOnACompositeFKJoinToCompositePK() {
-        //given:
+
         val compositePk = qEntity(CompositePk::class.java)
         val compositeFk = qEntity(CompositeFk::class.java)
 
-        //when:
+
         val pks = queryFactory.query()
                 .select(
                         constructor(
@@ -32,17 +32,17 @@ class KQJPACompositeFkDynamicExample(@Autowired var queryFactory: SQLQueryFactor
                 .where(compositeFk.string("desc").eq("fkd2"))
                 .fetch()
 
-        //then:
+
         println(pks)
     }
 
     
     fun getAllRowsFromAnEntityBasedOnACompositeFKJoinToSingularPK() {
-        //given:
+
         val singularPk = qEntity(SingularPk::class.java)
         val compositeFk = qEntity(CompositeFk::class.java)
 
-        //when:
+
         val pks = queryFactory.query()
                 .select(
                         constructor(
@@ -56,16 +56,16 @@ class KQJPACompositeFkDynamicExample(@Autowired var queryFactory: SQLQueryFactor
                 .where(compositeFk.string("desc").eq("fkd2"))
                 .fetch()
 
-        //then:
+
         println(pks)
     }
 
     fun getAllRowsGromAnEntityBasedOnAnInverseCompositeFKJoinToCompositePK() {
-        //given:
+
         val compositePk = qEntity(CompositePk::class.java)
         val compositeFk = qEntity(CompositeFk::class.java)
 
-        //when:
+
         val pks = queryFactory.query()
                 .select(
                         constructor(
@@ -79,17 +79,17 @@ class KQJPACompositeFkDynamicExample(@Autowired var queryFactory: SQLQueryFactor
                 .where(compositeFk.string("desc").eq("fkd2"))
                 .fetch()
 
-        //then:
+
         println(pks)
     }
 
     
     fun getAllRowsFromAnEntityBasedOnAnInverseCompositeFKJoinToSingularPK() {
-        //given:
+
         val singularPk = qEntity(SingularPk::class.java)
         val compositeFk = qEntity(CompositeFk::class.java)
 
-        //when:
+
         val pks = queryFactory.query()
                 .select(
                         constructor(
@@ -103,7 +103,7 @@ class KQJPACompositeFkDynamicExample(@Autowired var queryFactory: SQLQueryFactor
                 .where(compositeFk.string("desc").eq("fkd2"))
                 .fetch()
 
-        //then:
+
         println(pks)
     }
 

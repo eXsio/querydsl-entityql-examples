@@ -13,12 +13,12 @@ import pl.exsio.querydsl.entityql.examples.jpa.entity.*
 class KQJPAJoinDynamicExample(@Autowired var queryFactory: SQLQueryFactory) : Example {
     
     fun getAllRowsFromAnEntityBasedOnAColumnONJoin() {
-        //given:
+
         val book = qEntity(Book::class.java)
         val order = qEntity(Order::class.java)
         val orderItem = qEntity(OrderItem::class.java)
 
-        //when:
+
         val books = queryFactory.query()
                 .select(
                         constructor(
@@ -34,18 +34,18 @@ class KQJPAJoinDynamicExample(@Autowired var queryFactory: SQLQueryFactory) : Ex
                 .where(order.longNumber("id").eq(1L))
                 .fetch()
 
-        //then:
+
         println(books)
     }
 
     
     fun getAllRowsUsingListOfColumnNames() {
-        //given:
+
         val book = qEntity(Book::class.java)
         val order = qEntity(Order::class.java)
         val orderItem = qEntity(OrderItem::class.java)
 
-        //when:
+
         val books = queryFactory.query()
                 .select(
                         dto(Book::class.java, book.columns("id", "name", "desc", "price"))
@@ -56,18 +56,18 @@ class KQJPAJoinDynamicExample(@Autowired var queryFactory: SQLQueryFactory) : Ex
                 .where(order.longNumber("id").eq(1L))
                 .fetch()
 
-        //then:
+
         println(books)
     }
 
     
     fun getAllRowsFromAnEntityBasedOnFKJoin() {
-        //given:
+
         val book = qEntity(Book::class.java)
         val order = qEntity(Order::class.java)
         val orderItem = qEntity(OrderItem::class.java)
 
-        //when:
+
         val books = queryFactory.query()
                 .select(
                         constructor(
@@ -83,17 +83,17 @@ class KQJPAJoinDynamicExample(@Autowired var queryFactory: SQLQueryFactory) : Ex
                 .where(order.longNumber("id").eq(2L))
                 .fetch()
 
-        //then:
+
         println(books)
     }
 
     
     fun getAllRowsFromAnEntityBasedOnFKJoinWithCustomReferencedColumnName() {
-        //given:
+
         val group = qEntity(Group::class.java)
         val groupAdmin = qEntity(GroupAdmin::class.java)
 
-        //when:
+
         val groups = queryFactory.query()
                 .select(
                         constructor(
@@ -106,18 +106,18 @@ class KQJPAJoinDynamicExample(@Autowired var queryFactory: SQLQueryFactory) : Ex
                 .where(groupAdmin.longNumber("id").eq(2L))
                 .fetch()
 
-        //then:
+
         println(groups)
     }
 
     
     fun getAllRowsFromAnEntityBasedOnJoinTableMappingUsingONClause() {
-        //given:
+
         val group = qEntity(Group::class.java)
         val user = qEntity(User::class.java)
         val userGroup = qEntity(UserGroup::class.java)
 
-        //when:
+
         val groups = queryFactory.query()
                 .select(
                         constructor(
@@ -131,18 +131,18 @@ class KQJPAJoinDynamicExample(@Autowired var queryFactory: SQLQueryFactory) : Ex
                 .where(user.longNumber("id").eq(2L))
                 .fetch()
 
-        //then:
+
         println(groups)
     }
 
     
     fun getAllRowsFromAnEntityBasedOnJoinTableMappingUsingFKJoin() {
-        //given:
+
         val group = qEntity(Group::class.java)
         val user = qEntity(User::class.java)
         val userGroup = qEntity(UserGroup::class.java)
 
-        //when:
+
         val groups = queryFactory.query()
                 .select(
                         constructor(
@@ -156,18 +156,18 @@ class KQJPAJoinDynamicExample(@Autowired var queryFactory: SQLQueryFactory) : Ex
                 .where(user.longNumber("id").eq(2L))
                 .fetch()
 
-        //then:
+
         println(groups)
     }
 
     
     fun getAllRowsFromAnEntityBasedOnAnInverseFKJoin() {
-        //given:
+
         val book = qEntity(Book::class.java)
         val order = qEntity(Order::class.java)
         val orderItem = qEntity(OrderItem::class.java)
 
-        //when:
+
         val books = queryFactory.query()
                 .select(
                         constructor(
@@ -183,7 +183,7 @@ class KQJPAJoinDynamicExample(@Autowired var queryFactory: SQLQueryFactory) : Ex
                 .where(order.longNumber("id").eq(2L))
                 .fetch()
 
-        //then:
+
        println(books)
     }
 
@@ -194,7 +194,7 @@ class KQJPAJoinDynamicExample(@Autowired var queryFactory: SQLQueryFactory) : Ex
         val order = qEntity(Order::class.java)
         val orderItem = qEntity(OrderItem::class.java)
 
-        //when:
+
         val books = queryFactory.query()
                 .select(
                         constructor(
@@ -210,7 +210,7 @@ class KQJPAJoinDynamicExample(@Autowired var queryFactory: SQLQueryFactory) : Ex
                 .where(order.longNumber("id").eq(2L))
                 .fetch()
 
-        //then:
+
         println(books)
     }
 

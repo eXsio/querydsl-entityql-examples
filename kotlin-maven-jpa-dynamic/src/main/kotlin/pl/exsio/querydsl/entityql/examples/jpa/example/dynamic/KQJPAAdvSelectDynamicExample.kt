@@ -23,10 +23,10 @@ class KQJPAAdvSelectDynamicExample(@Autowired var queryFactory: SQLQueryFactory)
 
     
     fun useAggregateFunctions() {
-        //given:
+
         val orderItem = qEntity(OrderItem::class.java)
 
-        //when:
+
 
         val result = queryFactory
                 .select(
@@ -39,18 +39,18 @@ class KQJPAAdvSelectDynamicExample(@Autowired var queryFactory: SQLQueryFactory)
                 .orderBy(orderItem.longNumber("orderId").asc())
                 .fetch();
 
-        //then:
+
         println(result)
     }
     
     fun useSubQueries() {
-        //given:
+
         val user = qEntity(User::class.java)
         val book = qEntity(Book::class.java)
         val order = qEntity(Order::class.java)
         val orderItem = qEntity(OrderItem::class.java)
 
-        //when:
+
         val result = queryFactory
                 .select(user.string("name"))
                 .from(user)
@@ -62,7 +62,7 @@ class KQJPAAdvSelectDynamicExample(@Autowired var queryFactory: SQLQueryFactory)
                                 .where(book.decimalNumber("price").gt(BigDecimal("80")))
                 )).fetch()
 
-        //then:
+
         println(result)
 
     }
@@ -73,7 +73,7 @@ class KQJPAAdvSelectDynamicExample(@Autowired var queryFactory: SQLQueryFactory)
         val order = qEntity(Order::class.java)
         val orderItem = qEntity(OrderItem::class.java)
 
-        //when:
+
         val result = queryFactory
                 .select(count(Wildcard.all))
                 .from(
@@ -84,7 +84,7 @@ class KQJPAAdvSelectDynamicExample(@Autowired var queryFactory: SQLQueryFactory)
                                 .where(book.decimalNumber("price").gt(BigDecimal("80")))
                 ).fetchOne()
 
-        //then:
+
         println(result)
     }
 

@@ -29,7 +29,7 @@ class KQSpringDataJDBCSimpleSelectGeneratedExample(@Autowired var queryFactory: 
                         ))
                 .from(book).fetch()
 
-        //then:
+
         println(books)
     }
 
@@ -38,7 +38,7 @@ class KQSpringDataJDBCSimpleSelectGeneratedExample(@Autowired var queryFactory: 
         // given:
         val book = QBook.instance
 
-        //when:
+
         val p = queryFactory.query()
                 .select(
                         constructor(
@@ -51,7 +51,7 @@ class KQSpringDataJDBCSimpleSelectGeneratedExample(@Autowired var queryFactory: 
                 .where(book.id.eq(1L))
                 .from(book).fetchOne()
 
-        //then:
+
         println(p)
     }
 
@@ -60,13 +60,13 @@ class KQSpringDataJDBCSimpleSelectGeneratedExample(@Autowired var queryFactory: 
         // given:
         val user = QUser.instance
 
-        //when:
+
         val userName = queryFactory.query()
                 .select(user.name)
                 .where(user.typeStr.eq(UserTypeByName.ADMIN))
                 .from(user).fetchOne()
 
-        //then:
+
         println(userName)
     }
 
@@ -75,13 +75,13 @@ class KQSpringDataJDBCSimpleSelectGeneratedExample(@Autowired var queryFactory: 
         // given:
         val user = QUser.instance
 
-        //when:
+
         val userName = queryFactory.query()
                 .select(user.name)
                 .where(user.typeOrd.eq(UserTypeByOrdinal.ADMIN))
                 .from(user).fetchOne()
 
-        //then:
+
         println(userName)
     }
 
@@ -90,13 +90,13 @@ class KQSpringDataJDBCSimpleSelectGeneratedExample(@Autowired var queryFactory: 
         // given:
         val user = QUser.instance
 
-        //when:
+
         val createdBy = queryFactory.query()
                 .select(user.createdBy)
                 .where(user.typeStr.eq(UserTypeByName.ADMIN))
                 .from(user).fetchOne()
 
-        //then:
+
         println(createdBy)
     }
 
@@ -105,43 +105,43 @@ class KQSpringDataJDBCSimpleSelectGeneratedExample(@Autowired var queryFactory: 
         // given:
         val user = QUser.instance
 
-        //when:
+
         val createdBy = queryFactory.query()
                 .select(user.createdBy)
                 .where(user.typeStr.eq(UserTypeByName.ADMIN))
                 .from(user).fetchOne()
 
-        //then:
+
         println(createdBy)
     }
 
 
     fun getEnumFields() {
-        //given:
+
         val user = QUser.instance
 
-        //when:
+
         val type = queryFactory.query()
                 .select(user.typeStr)
                 .where(user.typeStr.eq(UserTypeByName.ADMIN))
                 .from(user).fetchOne()
 
-        //then:
+
         println(type)
     }
 
 
     fun getBooleanFields() {
-        //given:
+
         val user = QUser.instance
 
-        //when:
+
         val enabled : Boolean? = queryFactory.query()
                 .select(user.enabled)
                 .where(user.typeStr.eq(UserTypeByName.ADMIN))
                 .from(user).fetchOne()
 
-        //then:
+
 
         println(enabled)
     }

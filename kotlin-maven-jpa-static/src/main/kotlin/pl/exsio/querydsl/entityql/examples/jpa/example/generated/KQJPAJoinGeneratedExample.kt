@@ -14,12 +14,12 @@ import pl.exsio.querydsl.entityql.examples.jpa.entity.generated.*
 class KQJPAJoinGeneratedExample(@Autowired var queryFactory: SQLQueryFactory) : Example {
     
     fun getAllRowsFromAnEntityBasedOnAColumnONJoin() {
-        //given:
+
         val book = QBook.instance
         val order = QOrder.instance
         val orderItem = QOrderItem.instance
 
-        //when:
+
         val books = queryFactory.query()
                 .select(
                         constructor(
@@ -35,18 +35,18 @@ class KQJPAJoinGeneratedExample(@Autowired var queryFactory: SQLQueryFactory) : 
                 .where(order.id.eq(1L))
                 .fetch()
 
-        //then:
+
         println(books)
     }
 
     
     fun getAllRowsUsingListOfColumnNames() {
-        //given:
+
         val book = QBook.instance
         val order = QOrder.instance
         val orderItem = QOrderItem.instance
 
-        //when:
+
         val books = queryFactory.query()
                 .select(
                         dto(Book::class.java, listOf(book.id, book.name, book.desc, book.price))
@@ -57,18 +57,18 @@ class KQJPAJoinGeneratedExample(@Autowired var queryFactory: SQLQueryFactory) : 
                 .where(order.id.eq(1L))
                 .fetch()
 
-        //then:
+
         println(books)
     }
 
     
     fun getAllRowsFromAnEntityBasedOnFKJoin() {
-        //given:
+
         val book = QBook.instance
         val order = QOrder.instance
         val orderItem = QOrderItem.instance
 
-        //when:
+
         val books = queryFactory.query()
                 .select(
                         constructor(
@@ -84,17 +84,17 @@ class KQJPAJoinGeneratedExample(@Autowired var queryFactory: SQLQueryFactory) : 
                 .where(order.id.eq(2L))
                 .fetch()
 
-        //then:
+
         println(books)
     }
 
     
     fun getAllRowsFromAnEntityBasedOnFKJoinWithCustomReferencedColumnName() {
-        //given:
+
         val group = QGroup.instance
         val groupAdmin = QGroupAdmin.instance
 
-        //when:
+
         val groups = queryFactory.query()
                 .select(
                         constructor(
@@ -107,18 +107,18 @@ class KQJPAJoinGeneratedExample(@Autowired var queryFactory: SQLQueryFactory) : 
                 .where(groupAdmin.id.eq(2L))
                 .fetch()
 
-        //then:
+
         println(groups)
     }
 
     
     fun getAllRowsFromAnEntityBasedOnJoinTableMappingUsingONClause() {
-        //given:
+
         val group = QGroup.instance
         val user = QUser.instance
         val userGroup = QUserGroup.instance
 
-        //when:
+
         val groups = queryFactory.query()
                 .select(
                         constructor(
@@ -132,18 +132,18 @@ class KQJPAJoinGeneratedExample(@Autowired var queryFactory: SQLQueryFactory) : 
                 .where(user.id.eq(2L))
                 .fetch()
 
-        //then:
+
         println(groups)
     }
 
     
     fun getAllRowsFromAnEntityBasedOnJoinTableMappingUsingFKJoin() {
-        //given:
+
         val group = QGroup.instance
         val user = QUser.instance
         val userGroup = QUserGroup.instance
 
-        //when:
+
         val groups = queryFactory.query()
                 .select(
                         constructor(
@@ -157,18 +157,18 @@ class KQJPAJoinGeneratedExample(@Autowired var queryFactory: SQLQueryFactory) : 
                 .where(user.id.eq(2L))
                 .fetch()
 
-        //then:
+
         println(groups)
     }
 
     
     fun getAllRowsFromAnEntityBasedOnAnInverseFKJoin() {
-        //given:
+
         val book = QBook.instance
         val order = QOrder.instance
         val orderItem = QOrderItem.instance
 
-        //when:
+
         val books = queryFactory.query()
                 .select(
                         constructor(
@@ -184,7 +184,7 @@ class KQJPAJoinGeneratedExample(@Autowired var queryFactory: SQLQueryFactory) : 
                 .where(order.id.eq(2L))
                 .fetch()
 
-        //then:
+
        println(books)
     }
 
@@ -195,7 +195,7 @@ class KQJPAJoinGeneratedExample(@Autowired var queryFactory: SQLQueryFactory) : 
         val order = QOrder.instance
         val orderItem = QOrderItem.instance
 
-        //when:
+
         val books = queryFactory.query()
                 .select(
                         constructor(
@@ -211,7 +211,7 @@ class KQJPAJoinGeneratedExample(@Autowired var queryFactory: SQLQueryFactory) : 
                 .where(order.id.eq(2L))
                 .fetch()
 
-        //then:
+
         println(books)
     }
 
