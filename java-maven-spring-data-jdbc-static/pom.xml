@@ -38,7 +38,7 @@
         <dependency>
             <groupId>com.github.eXsio</groupId>
             <artifactId>querydsl-entityql</artifactId>
-            <version>3.0.1</version>
+            <version>3.0.4</version>
         </dependency>
 
         <!-- QueryDSL SQL -->
@@ -107,15 +107,15 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <source>11</source>
-                            <target>11</target>
+                            <source>1.8</source>
+                            <target>1.8</target>
                             <compilerArgument>-parameters</compilerArgument>
                         </configuration>
                     </plugin>
                     <plugin>
                         <groupId>com.github.eXsio</groupId>
                         <artifactId>querydsl-entityql-maven-plugin</artifactId>
-                        <version>1.2.2</version>
+                        <version>1.2.3</version>
                         <executions>
                             <execution>
                                 <phase>compile</phase>
@@ -151,7 +151,7 @@
                             <dependency>
                                 <groupId>com.github.eXsio</groupId>
                                 <artifactId>querydsl-entityql</artifactId>
-                                <version>3.0.1</version>
+                                <version>3.0.4</version>
                             </dependency>
                         </dependencies>
                     </plugin>
@@ -167,8 +167,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <compilerArgument>-parameters</compilerArgument>
                 </configuration>
             </plugin>

@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.eXsio:querydsl-entityql:3.0.1'
+    implementation 'com.github.eXsio:querydsl-entityql:3.0.4'
     implementation 'com.querydsl:querydsl-sql:4.2.2'
     implementation 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.2.Final'
     implementation 'com.querydsl:querydsl-sql-spring:4.2.2'
@@ -25,7 +25,7 @@ dependencies {
 
 group = 'com.github.eXsio'
 version = '1.0-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '1.8'
 
 
 tasks.withType(JavaCompile) {

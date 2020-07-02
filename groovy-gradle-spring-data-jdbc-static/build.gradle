@@ -1,7 +1,7 @@
 plugins {
     id 'groovy'
     id 'java'
-    id 'pl.exsio.querydsl.entityql' version "0.0.6"
+    id 'pl.exsio.querydsl.entityql' version "0.0.10"
 }
 
 repositories {
@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.eXsio:querydsl-entityql:3.0.1'
+    implementation 'com.github.eXsio:querydsl-entityql:3.0.4'
     implementation 'com.querydsl:querydsl-sql:4.2.2'
     implementation 'org.springframework.data:spring-data-jdbc:1.1.1.RELEASE'
     implementation 'com.querydsl:querydsl-sql-spring:4.2.2'
@@ -27,7 +27,7 @@ dependencies {
 
 group = 'com.github.eXsio'
 version = '1.0-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '1.8'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
