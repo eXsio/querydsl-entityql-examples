@@ -38,7 +38,7 @@
         <dependency>
             <groupId>com.github.eXsio</groupId>
             <artifactId>querydsl-entityql</artifactId>
-            <version>3.0.4</version>
+            <version>3.1.0</version>
         </dependency>
 
         <!-- QueryDSL SQL -->
@@ -127,7 +127,7 @@
                     <plugin>
                         <groupId>com.github.eXsio</groupId>
                         <artifactId>querydsl-entityql-maven-plugin</artifactId>
-                        <version>1.2.3</version>
+                        <version>1.2.4</version>
                         <executions>
                             <execution>
                                 <phase>compile</phase>
@@ -164,7 +164,7 @@
                             <dependency>
                                 <groupId>com.github.eXsio</groupId>
                                 <artifactId>querydsl-entityql</artifactId>
-                                <version>3.0.4</version>
+                                <version>3.1.0</version>
                             </dependency>
                             <!-- needed to detect Groovy classes -->
                             <dependency>

@@ -1,7 +1,7 @@
 plugins {
     id "org.jetbrains.kotlin.jvm" version "1.3.72"
     id 'java'
-    id 'pl.exsio.querydsl.entityql' version "0.0.10"
+    id 'pl.exsio.querydsl.entityql' version "0.0.11"
 }
 
 repositories {
@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.eXsio:querydsl-entityql:3.0.4'
+    implementation 'com.github.eXsio:querydsl-entityql:3.1.0'
     implementation 'com.querydsl:querydsl-sql:4.2.2'
     implementation 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.2.Final'
     implementation 'com.querydsl:querydsl-sql-spring:4.2.2'

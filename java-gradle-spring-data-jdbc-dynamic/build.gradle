@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.eXsio:querydsl-entityql:3.0.4'
+    implementation 'com.github.eXsio:querydsl-entityql:3.1.0'
     implementation 'com.querydsl:querydsl-sql:4.2.2'
     implementation 'org.springframework.data:spring-data-jdbc:1.1.1.RELEASE'
     implementation 'com.querydsl:querydsl-sql-spring:4.2.2'
