@@ -1,7 +1,7 @@
 
 plugins {
     id 'java'
-    id 'pl.exsio.querydsl.entityql' version "0.0.11"
+    id 'pl.exsio.querydsl.entityql' version "0.0.12"
 }
 
 repositories {
@@ -38,7 +38,21 @@ entityql {
     generators = [
         generator = {
             type = 'JPA'
-            sourcePackage = 'pl.exsio.querydsl.entityql.examples.jpa.entity'
+            //sourcePackage = 'pl.exsio.querydsl.entityql.examples.jpa.entity'
+            sourceClasses = [
+                    'pl.exsio.querydsl.entityql.examples.jpa.entity.Book',
+                    'pl.exsio.querydsl.entityql.examples.jpa.entity.CompositeFk',
+                    'pl.exsio.querydsl.entityql.examples.jpa.entity.CompositePk',
+                    'pl.exsio.querydsl.entityql.examples.jpa.entity.Group',
+                    'pl.exsio.querydsl.entityql.examples.jpa.entity.GroupAdmin',
+                    'pl.exsio.querydsl.entityql.examples.jpa.entity.Order',
+                    'pl.exsio.querydsl.entityql.examples.jpa.entity.OrderItem',
+                    'pl.exsio.querydsl.entityql.examples.jpa.entity.SingularPk',
+                    'pl.exsio.querydsl.entityql.examples.jpa.entity.UploadedFile',
+                    'pl.exsio.querydsl.entityql.examples.jpa.entity.User',
+                    'pl.exsio.querydsl.entityql.examples.jpa.entity.UserGroup'
+
+            ]
             destinationPackage = 'pl.exsio.querydsl.entityql.examples.jpa.entity.generated'
         }
     ]
